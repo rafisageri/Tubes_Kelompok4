@@ -17,27 +17,27 @@ type
 		tahun	: integer;
 	end;
 	
-	mentah = record
-		nama		: string;
+	mentah = record 
+		nama		: array [arrMin..arrMax] of char;
 		harga		: integer;
 		kadaluarsa	: integer;
 	end;
 	
 	tabMentah = record
 		tab		: array [arrMin..arrMax] of mentah;
-		neff	: integer;
+		neff		: integer;
 	end;
 	
 	olahan = record
 		nama		: string;
 		hargajual	: integer;
-		n			: integer;
+		n		: integer;
 		bahan		: array[arrMin..n] of mentah;
 	end;
 	
 	tabOlahan = record
 		tab		: array [arrMin..arrMax] of olahan;
-		neff	: integer;
+		neff		: integer;
 	end;
 	
 	inventoriM = record
@@ -47,7 +47,7 @@ type
 	end;
 	
 	tabInventoriM = record
-		tab		: array [arrMin..arrMax] of inventoriM;
+		tab	: array [arrMin..arrMax] of inventoriM;
 		neff	: integer;
 	end;
 	
@@ -58,19 +58,19 @@ type
 	end;
 	
 	tabInventoriO = record
-		tab		: array [arrMin..arrMax] of inventoriO;
+		tab	: array [arrMin..arrMax] of inventoriO;
 		neff	: integer;
 	end;
 	
 	resep = record
 		nama	: string;
 		harga	: integer;
-		n		: integer;
+		n	: integer;
 		bahan	: array [arrMin..n] of mentah;
 	end;
 	
 	tabResep = record
-		tab		: array [arrMin..arrMax] of resep;
+		tab	: array [arrMin..arrMax] of resep;
 		neff	: integer;
 	end;
 	
@@ -80,17 +80,17 @@ type
 		totalhari		: integer;
 		energi			: integer;
 		kapasitas		: integer;
-		totalmentahbeli	: integer;
-		totalbahanbuat	: integer;
-		totalbahanjual	: integer;
-		totalresepjual	: integer;
+		totalmentahbeli		: integer;
+		totalbahanbuat		: integer;
+		totalbahanjual		: integer;
+		totalresepjual		: integer;
 		pemasukan		: integer;
 		pengeluaran		: integer;
 		uang			: integer;
 	end;
 	
 	tabSimulasi = record
-		tab		: array [arrMin..arrMax] of simulasi;
+		tab	: array [arrMin..arrMax] of simulasi;
 		neff	: integer;
 	end;
 	
