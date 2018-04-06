@@ -1,5 +1,4 @@
-
-# Tubes_Kelompok4
+#Tubes_Kelompok4
 
 Halo guys, jadi ini repository buat tubes kita. 
 
@@ -12,6 +11,6 @@ PENTING !
 
 Beberapa istilah yang ada di github
 
-Commit : Ngirim file/perubahan file
-Branch : Semacem 'folder'. Jadi sebenernya itu fungsinya buat nyimpen beberapa versi dari program yang dibuat
+-Commit : Ngirim file/perubahan file
+-Branch : Semacem 'folder'. Jadi sebenernya itu fungsinya buat nyimpen beberapa versi dari program yang dibuat
 
