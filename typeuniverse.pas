@@ -3,10 +3,14 @@ unit typeuniverse;
 interface
 
 const
+	//program utama
 	arrMin = 1;
 	arrMax = 100;
 	
+	//[nama modul] - [pemilik modul]
+	//(tambah konstanta disini)
 type
+	//program utama
 	tanggal = record
 		hari	: integer;
 		bulan	: integer;
@@ -89,6 +93,9 @@ type
 		tab		: array [arrMin..arrMax] of simulasi;
 		neff	: integer;
 	end;
+	
+	//[nama modul] - [pemilik modul]
+	//(tambah tipe disini)
 	
 implementation
 
