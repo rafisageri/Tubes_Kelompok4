@@ -18,6 +18,7 @@ begin
 	//dalam suatu simulasi
 	
 		//Call0 here
+		//Uses callSim, preSimulasi action here
 		
 		while hari<10 and not(eoprog) do
 		//dalam suatu hari
@@ -36,7 +37,7 @@ begin
 				end	
 				else //energi <>0
 				begin
-					Call1(); //main action
+					Call1(); //uses callSim, main action
 				end;
 			until eoDay or eoProg;
 			
