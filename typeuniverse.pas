@@ -27,8 +27,7 @@ type
 	end;
 	
 	////////////////////////////////
-	//tipe untuk file bahan olahan//
-	olahan = record
+	//tipe untuk file bahan olahan//	olahan = record
 		nama		: string;
 		harga		: integer;
 		n			: integer;
@@ -41,14 +40,15 @@ type
 	end;
 	
 	//////////////////////////////////////////
-	//tipe untuk file inventori bahan mentah//	inventoriM = record
+	//tipe untuk file inventori bahan mentah//	
+	inventoriM = record
 		nama	: string;
 		tglbeli	: tanggal;
 		jumlah	: integer;
 	end;
 	
 	tabInventoriM = record
-		tab		: array [arrMin..arrMax] of inventoriM;
+		tab	: array [arrMin..arrMax] of inventoriM;
 		neff	: integer;
 		ntot	: integer;
 	end;
