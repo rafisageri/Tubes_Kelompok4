@@ -81,8 +81,10 @@ type
 	resep = record
 		nama	: string;
 		harga	: integer;
-		n		: integer;
-		bahan	: array [arrMin..arrMax] of mentah;
+		nmentah		: integer;
+		bahanmentah	: array [arrMin..arrMax] of mentah;
+		nolahan         : integer; 
+		bahanolahan     : array [arrMin..arrMax] of olahan;
 	end;
 	
 	tabResep = record
