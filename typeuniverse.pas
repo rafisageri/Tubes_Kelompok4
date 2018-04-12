@@ -64,6 +64,7 @@ type
 		nama	: string;
 		tglbuat	: tanggal;
 		jumlah	: integer;
+		harga   : integer; 
 	end;
 	
 	tabInventoriO = record
