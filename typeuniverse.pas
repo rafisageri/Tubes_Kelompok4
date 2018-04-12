@@ -3,41 +3,37 @@ unit typeuniverse;
 interface
 
 const
-	//program utama
 	arrMin = 1;
 	arrMax = 100;
 	
-	//[nama modul] - [pemilik modul]
-	//(tambah konstanta disini)
 type
-	//program utama
 	tanggal = record
 		hari	: integer;
 		bulan	: integer;
 		tahun	: integer;
 	end;
 	
-	mentah = record 
-		nama		: array [arrMin..arrMax] of char;
+	mentah = record
+		nama		: string;
 		harga		: integer;
 		kadaluarsa	: integer;
 	end;
 	
 	tabMentah = record
 		tab		: array [arrMin..arrMax] of mentah;
-		neff		: integer;
+		neff	: integer;
 	end;
 	
 	olahan = record
 		nama		: string;
-		hargajual	: integer;
-		n		: integer;
-		bahan		: array[arrMin..n] of mentah;
+		harga		: integer;
+		n			: integer;
+		komposisi	: array [arrMin..arrMax] of mentah;
 	end;
 	
 	tabOlahan = record
 		tab		: array [arrMin..arrMax] of olahan;
-		neff		: integer;
+		neff	: integer;
 	end;
 	
 	inventoriM = record
@@ -47,8 +43,9 @@ type
 	end;
 	
 	tabInventoriM = record
-		tab	: array [arrMin..arrMax] of inventoriM;
+		tab		: array [arrMin..arrMax] of inventoriM;
 		neff	: integer;
+		ntot	: integer;
 	end;
 	
 	inventoriO = record
@@ -58,19 +55,20 @@ type
 	end;
 	
 	tabInventoriO = record
-		tab	: array [arrMin..arrMax] of inventoriO;
+		tab		: array [arrMin..arrMax] of inventoriO;
 		neff	: integer;
+		ntot	: integer;
 	end;
 	
 	resep = record
 		nama	: string;
 		harga	: integer;
-		n	: integer;
-		bahan	: array [arrMin..n] of mentah;
+		n		: integer;
+		bahan	: array [arrMin..arrMax] of mentah;
 	end;
 	
 	tabResep = record
-		tab	: array [arrMin..arrMax] of resep;
+		tab		: array [arrMin..arrMax] of resep;
 		neff	: integer;
 	end;
 	
@@ -80,22 +78,19 @@ type
 		totalhari		: integer;
 		energi			: integer;
 		kapasitas		: integer;
-		totalmentahbeli		: integer;
-		totalbahanbuat		: integer;
-		totalbahanjual		: integer;
-		totalresepjual		: integer;
+		totalmentahbeli	: integer;
+		totalbahanbuat	: integer;
+		totalbahanjual	: integer;
+		totalresepjual	: integer;
 		pemasukan		: integer;
 		pengeluaran		: integer;
 		uang			: integer;
 	end;
 	
 	tabSimulasi = record
-		tab	: array [arrMin..arrMax] of simulasi;
+		tab		: array [arrMin..arrMax] of simulasi;
 		neff	: integer;
 	end;
-	
-	//[nama modul] - [pemilik modul]
-	//(tambah tipe disini)
 	
 implementation
 
