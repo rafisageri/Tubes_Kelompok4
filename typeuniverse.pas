@@ -32,7 +32,7 @@ type
 		nama		: string;
 		harga		: integer;
 		n			: integer;
-		komposisi	: array [arrMin..arrMax] of mentah;
+		komposisi	: array [arrMin..arrMax] of string;
 	end;
 	
 	tabOlahan = record
