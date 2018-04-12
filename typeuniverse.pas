@@ -91,25 +91,7 @@ type
 	
 	////////////////////////////////////
 	//tipe untuk file daftar informasi//
-	simulasi = record
-		nomor			: integer;
-		awalsim			: tanggal;
-		totalhari		: integer;
-		energi			: integer;
-		kapasitas		: integer;
-		totalmentahbeli	: integer;
-		totalbahanbuat	: integer;
-		totalbahanjual	: integer;
-		totalresepjual	: integer;
-		pemasukan		: integer;
-		pengeluaran		: integer;
-		uang			: integer;
-	end;
-	
-	listSimulasi = record
-		list	: array [1..10] of simulasi;
-		neff	: integer;
-	end;
+	//dicuri bentar
 	
 implementation
 
