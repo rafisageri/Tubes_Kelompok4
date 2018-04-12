@@ -27,11 +27,12 @@ type
 	end;
 	
 	////////////////////////////////
-	//tipe untuk file bahan olahan//	olahan = record
+	//tipe untuk file bahan olahan//
+	olahan = record
 		nama		: string;
 		harga		: integer;
 		n			: integer;
-		komposisi	: array [arrMin..arrMax] of string;
+		komposisi	: array [arrMin..arrMax] of mentah;
 	end;
 	
 	tabOlahan = record
@@ -40,7 +41,7 @@ type
 	end;
 	
 	//////////////////////////////////////////
-	//tipe untuk file inventori bahan mentah//	
+	//tipe untuk file inventori bahan mentah//
 	inventoriM = record
 		nama	: string;
 		tglbeli	: tanggal;
@@ -48,7 +49,7 @@ type
 	end;
 	
 	tabInventoriM = record
-		tab	: array [arrMin..arrMax] of inventoriM;
+		tab		: array [arrMin..arrMax] of inventoriM;
 		neff	: integer;
 		ntot	: integer;
 	end;
@@ -56,7 +57,7 @@ type
 	listInventoriM = record
 		list	: array [1..10] of tabInventoriM;
 		neff	: integer;
-	end;		
+	end; 	
 	////////////////////////////////////
 	//tipe untuk file inventori olahan//
 	inventoriO = record
@@ -74,7 +75,7 @@ type
 	listInventoriO = record
 		list	: array [1..10] of tabInventoriO;
 		neff	: integer;
-	end;
+	end;	
 	////////////////////////////////
 	//tipe untuk file daftar resep//
 	resep = record
@@ -91,7 +92,7 @@ type
 	
 	////////////////////////////////////
 	//tipe untuk file daftar informasi//
-	//dicuri bentar
+	//      DICURI KE SIMUL.PAS       //
 	
 implementation
 
