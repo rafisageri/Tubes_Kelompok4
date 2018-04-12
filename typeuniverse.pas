@@ -41,8 +41,7 @@ type
 	end;
 	
 	//////////////////////////////////////////
-	//tipe untuk file inventori bahan mentah//
-	inventoriM = record
+	//tipe untuk file inventori bahan mentah//	inventoriM = record
 		nama	: string;
 		tglbeli	: tanggal;
 		jumlah	: integer;
@@ -57,7 +56,7 @@ type
 	listInventoriM = record
 		list	: array [1..10] of tabInventoriM;
 		neff	: integer;
-		
+	end;		
 	////////////////////////////////////
 	//tipe untuk file inventori olahan//
 	inventoriO = record
@@ -72,10 +71,10 @@ type
 		ntot	: integer;
 	end;
 	
-	listInventoriM = record
+	listInventoriO = record
 		list	: array [1..10] of tabInventoriO;
 		neff	: integer;
-		
+	end;
 	////////////////////////////////
 	//tipe untuk file daftar resep//
 	resep = record
