@@ -1,6 +1,7 @@
 program test;
 uses
-	simul;
+	simul,
+	typeuniverse;
 
 var
 	a : filesimul;
