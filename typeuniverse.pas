@@ -13,6 +13,8 @@ type
 		tahun	: integer;
 	end;
 	
+	////////////////////////////////
+	//tipe untuk file bahan mentah//
 	mentah = record
 		nama		: string;
 		harga		: integer;
@@ -24,6 +26,8 @@ type
 		neff	: integer;
 	end;
 	
+	////////////////////////////////
+	//tipe untuk file bahan olahan//
 	olahan = record
 		nama		: string;
 		harga		: integer;
@@ -36,6 +40,8 @@ type
 		neff	: integer;
 	end;
 	
+	//////////////////////////////////////////
+	//tipe untuk file inventori bahan mentah//
 	inventoriM = record
 		nama	: string;
 		tglbeli	: tanggal;
@@ -48,6 +54,12 @@ type
 		ntot	: integer;
 	end;
 	
+	listInventoriM = record
+		list	: array [1..10] of tabInventoriM;
+		neff	: integer;
+		
+	////////////////////////////////////
+	//tipe untuk file inventori olahan//
 	inventoriO = record
 		nama	: string;
 		tglbuat	: tanggal;
@@ -60,6 +72,12 @@ type
 		ntot	: integer;
 	end;
 	
+	listInventoriM = record
+		list	: array [1..10] of tabInventoriO;
+		neff	: integer;
+		
+	////////////////////////////////
+	//tipe untuk file daftar resep//
 	resep = record
 		nama	: string;
 		harga	: integer;
@@ -72,6 +90,8 @@ type
 		neff	: integer;
 	end;
 	
+	////////////////////////////////////
+	//tipe untuk file daftar informasi//
 	simulasi = record
 		nomor			: integer;
 		awalsim			: tanggal;
@@ -87,8 +107,8 @@ type
 		uang			: integer;
 	end;
 	
-	tabSimulasi = record
-		tab		: array [arrMin..arrMax] of simulasi;
+	listSimulasi = record
+		list	: array [1..10] of simulasi;
 		neff	: integer;
 	end;
 	
