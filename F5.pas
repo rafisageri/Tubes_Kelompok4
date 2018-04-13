@@ -14,33 +14,35 @@ implementation
 		tt : TDateTime;
 		dd,mm,yy : word;
 	begin
-		writeln('Beli bahan:');
+		writeln('Beli bahan:'); {INPUT NAMA}
 		readln(x.nama);
-		writeln('Jumlah:');
+		writeln('Jumlah:'); {INPUT JUMLAH}
 		readln(n);
 		
 		i:=1;
 		cek := false;
-		while (i<=a.neff) or not(cek) do
+		while (i<=a.neff) and (cek=false) do {VALIDASI NAMA BAHAN}
 		begin
 			if (a.tab[i].nama = x.nama) then cek := true
-			else i:=i+1;
+			else
+			i:=i+1;
 		end;
 		
-		if (not(cek)) then writeln('Pembelian gagal, bahan tidak dijual di supermarket')
-		else
+		if (cek=false) then writeln('Pembelian gagal, bahan tidak dijual di supermarket') {BAHAN TIDAK TERSEDIA DI FILE}
+		else {BAHAN DITEMUKAN}
 		begin
-			if (e<=0) then writeln('Pembelian gagal, energi tidak mencukupi')
-			else
+			if (e<=0) then writeln('Pembelian gagal, energi tidak mencukupi') {ENERGI TIDAK CUKUP}
+			else {ENERGI MENCUKUPI}
 			begin
-				if ((b.ntot+n+c.ntot) > imax) then writeln('Pembelian gagal, inventori tidak mencukupi')
-				else
+				if ((b.ntot+n+c.ntot) > imax) then writeln('Pembelian gagal, inventori tidak mencukupi') {INVENTORI PENUH}
+				else {INVENTORI CUKUP}
 				begin
-					if (a.tab[i].harga*n > u) then writeln('Pembelian gagal, uang tidak mencukupi')
-					else
+					if (a.tab[i].harga*n > u) then writeln('Pembelian gagal, uang tidak mencukupi') {UANG TIDAK CUKUP}
+					else {UANG CUKUP}
 					begin
 						e:= e-1;
 						u:= u - (a.tab[i].harga*n );
+						{INPUT KE INVENTORI}
 						b.tab[b.neff+1].nama := x.nama;
 						begin
 							tt:=Date;
@@ -52,6 +54,7 @@ implementation
 						b.tab[b.neff+1].jumlah := n;
 						b.neff := b.neff+1;
 						b.ntot := b.ntot+n;
+						writeln('Pembelian berhasil');
 					end;
 				end;
 			end;
