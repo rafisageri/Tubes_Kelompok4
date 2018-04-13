@@ -83,9 +83,9 @@ type
 		nama	: string;
 		harga	: integer;
 		nmentah		: integer;
-		bahanmentah	: array [arrMin..arrMax] of mentah;
+		partmentah	: array [arrMin..arrMax] of mentah;
 		nolahan         : integer; 
-		bahanolahan     : array [arrMin..arrMax] of olahan;
+		partolahan     : array [arrMin..arrMax] of olahan;
 	end;
 	
 	tabResep = record
