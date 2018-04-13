@@ -79,12 +79,14 @@ implementation
 									if ((a.tab[z].jumlah-n)<0) then {KASUS TERNYATA PAS KETEMU GA CUKUP}
 									begin
 										p:= n- a.tab[z].jumlah;
+										a.ntot := a.ntot - a.tab[z].jumlah;
 										a.tab[z].jumlah := 0;
 										z:= z+1;
 									end
 									else {KASUS LANGSUNG/PAS SETELAH KETEMU CUKUP}
 									begin
 										a.tab[z].jumlah := (a.tab[z].jumlah-p);
+										a.ntot := a.ntot - p;
 										beres := true;
 									end;
 								end; 
