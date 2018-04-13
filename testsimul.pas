@@ -1,23 +1,22 @@
 program test;
 uses
-	simul,
-	typeuniverse;
+	simul;
 
 var
-	a : filesimul;
+	a : integer;
 	name : string;
 	ayyy : listSimulasi;
-	stop : boolean;
-	x : char;
 begin
+	readln(a);
+	readln(name);
 	
-	stop:=false;
-	repeat
-		writeln('stop? y/n');
-		readln(x);
-		if x = 'y' then 
-			stop:=true
-		else
-			fSIm2var(a, name, ayyy);
-	until stop;
+	pSimtoArr(a, name, ayyy); // baca
+	
+	lihatStatistik(a, ayyy); //write layar
+	
+	writeln('disini gua set energi jadi 15');
+	ayyy.list[a].energi := 15; //test ngoprek
+	lihatStatistik(a, ayyy); //write layar
+	
+	pArrToSim(a, name, ayyy); //save file
 end.
