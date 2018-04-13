@@ -2,14 +2,11 @@ unit CallSim;
 
 interface
 	uses
-		basic;
-		kitchen;
-		chef;
+		typeuniverse,
+		simul;
 	procedure Call1(s: string; var eoD : boolean; var e: integer);
 	
 implementation
-
-	
 	procedure Call1(s: string;
 					var e: integer;
 					var eoD:boolean;
@@ -65,9 +62,9 @@ implementation
 		begin
 			tidur(bTidur, energi, eoD, invMth, invOlh);
 		end
-		else if s='lihatStatistik' then //F12
+		else if s='lihatStatistik' then //F12 @simul.pas
 		begin
-			lihatStatistik(...);
+			lihatStatistik(simulN, DftrSim);
 			bTidur:= True;
 		end
 		else if s='lihatInventori' then //F13
