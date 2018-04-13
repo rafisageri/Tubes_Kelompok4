@@ -9,7 +9,7 @@ implementation
 	procedure cariResep (a :tabResep);
 	var
 		x : resep;
-		i, j : integer;
+		i, j, k : integer;
 		cek : boolean;
 		
 	begin
@@ -29,9 +29,13 @@ implementation
 			writeln('Nama resep:');
 			writeln(a.tab[i].nama);
 			writeln('Bahan-bahan:');
-			for j:=1 to (a.tab[i].n) do
+			for j:=1 to (a.tab[i].nmentah) do
 			begin
-				writeln(a.tab[i].bahan[j].nama);
+				writeln(a.tab[i].partmentah[j].nama);
+			end;
+			for k:=1 to (a.tab[i].nolahan) do
+			begin
+				writeln(a.tab[i].partolahan[k].nama);
 			end;
 			writeln('Harga resep:');
 			writeln(a.tab[i].harga);
