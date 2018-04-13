@@ -12,6 +12,7 @@ implementation
 		i, n, u, z, p, j, k, l : integer;
 		cek : boolean;
 		gada : boolean;
+		beres : boolean;
 		tt : TDateTime;
 		dd,mm,yy : word;
 		tabSum : array[1..100] of integer;
@@ -62,12 +63,12 @@ implementation
 				
 				if (gada= false) then {BAHAN ADA SEMUA}
 				begin
-					u := 1;
-					while (u<=o.tab[i].n) do {U= BANYAK BAHAN, EX: NASI GORENG, U=2, NASI, KECAP}
+					for (u:=1 to o.tab[i].n) do {U= BANYAK BAHAN, EX: NASI GORENG, U=2, NASI, KECAP}
 					begin
 						p := n; {PENGGANTI N KALO ADA KASUS BAHAN PAS DIBELI GA CUKUP, MAKA KE PEMBELIAN BERIKUTNYA}
 						z := 1;
-						while (z<=a.neff) do {MENCARI BAHAN MENTAH DI INVENTORI MENTAH}
+						beres := false;
+						while (z<=a.neff) and not(beres) do {MENCARI BAHAN MENTAH DI INVENTORI MENTAH}
 						begin
 							if (a.tab[z].nama=o.tab[i].komposisi[u].nama) then {KALO DAPET NAMANYA DI INVENTORI}
 							begin
@@ -84,6 +85,7 @@ implementation
 									else {KASUS LANGSUNG/PAS SETELAH KETEMU CUKUP}
 									begin
 										a.tab[z].jumlah := (a.tab[z].jumlah-p);
+										beres := true;
 									end;
 								end; 
 							end
