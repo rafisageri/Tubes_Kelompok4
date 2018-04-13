@@ -29,10 +29,12 @@ interface
 	procedure pSimToArr(nfile: integer; nama:string; var arr: listSimulasi);
 	//I.S. terdapat textfile yang akan diassign ke inf.
 	//F.S. arr terisi
-	
 	procedure pArrToSim(nfile: integer; nama:string; arr: listSimulasi);
 	//I.S. arr terdefinisi
 	//F.S. textfile inf terdefinisi
+	procedure lihatStatistik(nfile:integer; arr: listSimulasi);
+	//I.S. nfile, arr terdefinisi
+	//menampilkan isi arr
 	
 implementation
 	procedure pSimToArr(nfile: integer; nama:string; var arr: listSimulasi);
