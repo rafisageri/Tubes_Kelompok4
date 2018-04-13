@@ -3,15 +3,25 @@ uses
 	typeuniverse;
 	CallSim;
 var
-	energi, hari, nMakan, nIstirahat, nTidur : integer;
+	NRG, hari, nMakan, nIstirahat, nTidur, simulN : integer;
 	komando1 : string;
 	eoDay,eoProg : Boolean;
 	invMentah : tabInventoriM;
 	invOlahan : tabInventoriO;
+	DftrSim: listSimulasi;
 	
 begin
 	//read file ke array here
-	//read file ke energi dan hari here
+	pSimToArr(1, simul1.txt, DftrSim);
+	pSimToArr(2, simul2.txt, DftrSim);
+	pSimToArr(3, simul3.txt, DftrSim);
+	pSimToArr(4, simul4.txt, DftrSim);
+	pSimToArr(5, simul5.txt, DftrSim);
+	pSimToArr(6, simul6.txt, DftrSim);
+	pSimToArr(7, simul7.txt, DftrSim);
+	pSimToArr(8, simul8.txt, DftrSim);
+	pSimToArr(9, simul9.txt, DftrSim);
+	pSimToArr(10, simul10.txt, DftrSim);
 	
 	
 	repeat
