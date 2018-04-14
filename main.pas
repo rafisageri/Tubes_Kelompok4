@@ -5,12 +5,13 @@ uses
 var
 	NRG, hari, nMakan, nIstirahat, nTidur, simulN : integer;
 	komando1 : string;
-	eoDay,eoProg : Boolean;
+	eoDay, eoSim, eoProg : Boolean;
 	invMentah : tabInventoriM;
 	invOlahan : tabInventoriO;
 	DftrSim: listSimulasi;
 	
 begin
+	writeln('> load');
 	//read file ke array here
 	pSimToArr(1, simul1.txt, DftrSim);
 	pSimToArr(2, simul2.txt, DftrSim);
@@ -24,20 +25,35 @@ begin
 	pSimToArr(10, simul10.txt, DftrSim);
 	
 	
+	eoProg:= False;
+	
 	repeat
-	//dalam suatu simulasi
+		hari := 999 //inisialisasi sebelum assign nilai faktual dari array
+		eoSim:=True; //belum tentu simulasi dijalankan
 	
 		//Call0 here
 		//Uses callSim, preSimulasi action here
 		
-		while hari<10 and not(eoprog) do
-		//dalam suatu hari
+		
+		//validasi hari
+		//inisialisasi eoSim := false ada di Call0, startSimulasi
+		if hari>=10 and not(eoSim) then		//hari sebenernya ada di array
+		begin
+			writeln('Simulasi sudah melewati 10 hari');
+			writeln('Simulasi tidak dapat dilanjutkan');
+			lihatStatistik(...);
+			eoSim:=True;
+		end;
+		
+		//dalam suatu simulasi
+		while not(eoSim) and not(eoProg) do
 		begin
 			eoDay:= false;
 			nIstirahat :=6;
 			nMakan :=3;
 			bTidur := false;
 			
+			//dalam suatu hari
 			repeat 
 				if energi=0 then
 				begin
@@ -49,15 +65,28 @@ begin
 				begin
 					Call1(); //uses callSim, main action
 				end;
-			until eoDay or eoProg;
+			until eoDay or eoSim;
 			
-			if not(eoProg) then
+			if not(eoSim) then
 			begin
 				hari:= hari+1; 
 			end;
 			
-		end;
+		end; //eoSim
 		
+		//save disini, sekaligus implementasi F2-exit (save data)
+		//walaupun simulasi tidak berjalan, data mungkin berubah
+		pArrToSim(1, simul1.txt, DftrSim);
+		pArrToSim(2, simul2.txt, DftrSim);
+		pArrToSim(3, simul3.txt, DftrSim);
+		pArrToSim(4, simul4.txt, DftrSim);
+		pArrToSim(5, simul5.txt, DftrSim);
+		pArrToSim(6, simul6.txt, DftrSim);
+		pArrToSim(7, simul7.txt, DftrSim);
+		pArrToSim(8, simul8.txt, DftrSim);
+		pArrToSim(9, simul9.txt, DftrSim);
+		pArrToSim(10, simul10.txt, DftrSim);
+	
 	until eoprog = True;
 	
   
