@@ -16,40 +16,40 @@ type
 	////////////////////////////////
 	//tipe untuk file bahan mentah//
 	mentah = record
-		nama		: string;
+		nama		: array [arrMin..arrMax] of char;
 		harga		: integer;
 		kadaluarsa	: integer;
 	end;
 	
 	tabMentah = record
-		tab		: array [arrMin..arrMax] of mentah;
+		tab	: array [arrMin..arrMax] of mentah;
 		neff	: integer;
 	end;
 	
 	////////////////////////////////
 	//tipe untuk file bahan olahan//
 	olahan = record
-		nama		: string;
+		nama		: array [arrMin..arrMax] of char;
 		harga		: integer;
-		n			: integer;
+		n		: integer;
 		komposisi	: array [arrMin..arrMax] of mentah;
 	end;
 	
 	tabOlahan = record
-		tab		: array [arrMin..arrMax] of olahan;
+		tab	: array [arrMin..arrMax] of olahan;
 		neff	: integer;
 	end;
 	
 	//////////////////////////////////////////
 	//tipe untuk file inventori bahan mentah//
 	inventoriM = record
-		nama	: string;
+		nama	: array [arrMin..arrMax] of char;
 		tglbeli	: tanggal;
 		jumlah	: integer;
 	end;
 	
 	tabInventoriM = record
-		tab		: array [arrMin..arrMax] of inventoriM;
+		tab	: array [arrMin..arrMax] of inventoriM;
 		neff	: integer;
 		ntot	: integer;
 	end;
@@ -61,14 +61,14 @@ type
 	////////////////////////////////////
 	//tipe untuk file inventori olahan//
 	inventoriO = record
-		nama	: string;
+		nama	: array [arrMin..arrMax] of char;
 		tglbuat	: tanggal;
 		jumlah	: integer;
 		harga   : integer; 
 	end;
 	
 	tabInventoriO = record
-		tab		: array [arrMin..arrMax] of inventoriO;
+		tab	: array [arrMin..arrMax] of inventoriO;
 		neff	: integer;
 		ntot	: integer;
 	end;
@@ -80,16 +80,16 @@ type
 	////////////////////////////////
 	//tipe untuk file daftar resep//
 	resep = record
-		nama	: string;
-		harga	: integer;
+		nama		: array [arrMin..arrMax] of char;
+		harga		: integer;
 		nmentah		: integer;
 		partmentah	: array [arrMin..arrMax] of mentah;
 		nolahan         : integer; 
-		partolahan     : array [arrMin..arrMax] of olahan;
+		partolahan     	: array [arrMin..arrMax] of olahan;
 	end;
 	
 	tabResep = record
-		tab		: array [arrMin..arrMax] of resep;
+		tab	: array [arrMin..arrMax] of resep;
 		neff	: integer;
 	end;
 	
@@ -101,10 +101,10 @@ type
 		totalhari		: integer;
 		energi			: integer;
 		kapasitas		: integer;
-		totalmentahbeli	: integer;
-		totalbahanbuat	: integer;
-		totalbahanjual	: integer;
-		totalresepjual	: integer;
+		totalmentahbeli		: integer;
+		totalbahanbuat		: integer;
+		totalbahanjual		: integer;
+		totalresepjual		: integer;
 		pemasukan		: integer;
 		pengeluaran		: integer;
 		uang			: integer;
