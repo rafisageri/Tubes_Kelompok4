@@ -92,7 +92,15 @@ type
 		tab	: array [arrMin..arrMax] of resep;
 		neff	: integer;
 	end;
-	
+	//////////////////////////////////
+	//tipe untuk fungsi tambah resep//
+	Mresep = record 
+	        bahan : array [arrMin..arrMax] of string;
+		neff  : integer; 
+		
+        Oresep = record 
+	        bahan : array [arrMin..arrMax] of string; 
+		neff  : integer; 
 	////////////////////////////////////
 	//tipe untuk file daftar informasi//
 	simulasi = record
