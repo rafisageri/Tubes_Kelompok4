@@ -3,29 +3,32 @@ uses
 	typeuniverse;
 	CallSim;
 var
-	NRG, hari, nMakan, nIstirahat, nTidur, simulN : integer;
-	komando1 : string;
+	energi, hari, nMakan{jumlah kesempatan makan}, nIstirahat{jumlah kesempatan Istirahat}, nTidur {jumlah kesempatan tidur}, simN : integer{simulasi yg akan dijalankan};
 	eoDay, eoSim, eoProg : Boolean;
-	invMentah : tabInventoriM;
-	invOlahan : tabInventoriO;
-	DftrSim: listSimulasi;
+	
+	TglHariIni	: tanggal;
+	DftrResep	: tabResep;
+	DftrMentah	: tabMentah;
+	DftrOlahan	: tabOlahan;
+	invMentah	: listInventoriM;
+	invOlahan	: listInventoriO;
+	DftrSim		: listSimulasi;
 	
 begin
 	writeln('> load');
 	//read file ke array here
-	pSimToArr(1, simul1.txt, DftrSim);
-	pSimToArr(2, simul2.txt, DftrSim);
-	pSimToArr(3, simul3.txt, DftrSim);
-	pSimToArr(4, simul4.txt, DftrSim);
-	pSimToArr(5, simul5.txt, DftrSim);
-	pSimToArr(6, simul6.txt, DftrSim);
-	pSimToArr(7, simul7.txt, DftrSim);
-	pSimToArr(8, simul8.txt, DftrSim);
-	pSimToArr(9, simul9.txt, DftrSim);
-	pSimToArr(10, simul10.txt, DftrSim);
+	pArrToSim(1, 'simul1.txt', DftrSim;
+	pArrToSim(2, 'simul2.txt', DftrSim;
+	pArrToSim(3, 'simul3.txt', DftrSim;
+	pArrToSim(4, 'simul4.txt', DftrSim;
+	pArrToSim(5, 'simul5.txt', DftrSim;
+	pArrToSim(6, 'simul6.txt', DftrSim;
+	pArrToSim(7, 'simul7.txt', DftrSim;
+	pArrToSim(8, 'simul8.txt', DftrSim;
+	pArrToSim(9, 'simul9.txt', DftrSim;
+	pArrToSim(10, 'simul10.txt', DftrSim;
 	
-	
-	eoProg:= False;
+
 	
 	repeat
 		hari := 999 //inisialisasi sebelum assign nilai faktual dari array
@@ -33,7 +36,7 @@ begin
 	
 		//Call0 here
 		//Uses callSim, preSimulasi action here
-		
+		Call0();
 		
 		//validasi hari
 		//inisialisasi eoSim := false ada di Call0, startSimulasi
@@ -41,7 +44,7 @@ begin
 		begin
 			writeln('Simulasi sudah melewati 10 hari');
 			writeln('Simulasi tidak dapat dilanjutkan');
-			lihatStatistik(...);
+			lihatStatistik(simN, DftrSim);
 			eoSim:=True;
 		end;
 		
@@ -76,16 +79,18 @@ begin
 		
 		//save disini, sekaligus implementasi F2-exit (save data)
 		//walaupun simulasi tidak berjalan, data mungkin berubah
-		pArrToSim(1, simul1.txt, DftrSim);
-		pArrToSim(2, simul2.txt, DftrSim);
-		pArrToSim(3, simul3.txt, DftrSim);
-		pArrToSim(4, simul4.txt, DftrSim);
-		pArrToSim(5, simul5.txt, DftrSim);
-		pArrToSim(6, simul6.txt, DftrSim);
-		pArrToSim(7, simul7.txt, DftrSim);
-		pArrToSim(8, simul8.txt, DftrSim);
-		pArrToSim(9, simul9.txt, DftrSim);
-		pArrToSim(10, simul10.txt, DftrSim);
+		pArrToSim(1, 'simul1.txt', DftrSim;
+		pArrToSim(2, 'simul2.txt', DftrSim;
+		pArrToSim(3, 'simul3.txt', DftrSim;
+		pArrToSim(4, 'simul4.txt', DftrSim;
+		pArrToSim(5, 'simul5.txt', DftrSim;
+		pArrToSim(6, 'simul6.txt', DftrSim;
+		pArrToSim(7, 'simul7.txt', DftrSim;
+		pArrToSim(8, 'simul8.txt', DftrSim;
+		pArrToSim(9, 'simul9.txt', DftrSim;
+		pArrToSim(10, 'simul10.txt', DftrSim;
+	
+		
 	
 	until eoprog = True;
 	
