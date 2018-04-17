@@ -7,7 +7,7 @@ interface
   function cariResep (resep : string; daftarResep : tabResep): integer;
   function isBahanMentahValid (bahan : string; n : integer; daftarBahan : TabInventoriM): boolean;
   function isBahanOlahanValid (bahan : string; n : integer; daftarBahan : TabInventoriO): boolean;  
-  procedure jualResep(var BahanMentah : ListInventoriM; var BahanOlahan : ListInventoriO; ResepJadi : tabresep; var Energi : integer; var Pendapatan : integer; Nsim : integer); 
+  procedure jualResep (resep : string; daftarResep : tabresep; daftarBahanM : TabInventoriM; daftarBahanO : TabInventoriO; var pendapatan : integer; var energi : integer);
 
 implementation 
 
@@ -108,7 +108,6 @@ function isBahanMentahValid (bahan : string; n : integer; daftarBahan : TabInven
 				isBahanMentahValid := True;
 			end else {jumlah bahan tidak mencukupi untuk dijual}
 				isBahanMentahValid := False;
-			end;
 		end;
 	end;
 	
@@ -131,46 +130,78 @@ function isBahanOlahanValid (bahan : string; n : integer; daftarBahan : TabInven
 				isBahanOlahanValid := True;
 			end else {jumlah bahan tidak mencukupi untuk dijual}
 				isBahanOlahanValid := False;
-			end;
 		end;
 	end;
 
-procedure jualResep (resep : string; daftarResep : tabresep; daftarBahanM : TabInventoriM; daftarBahanO : TabInventoriO);
+procedure jualResep (resep : string; daftarResep : tabresep; daftarBahanM : TabInventoriM; daftarBahanO : TabInventoriO; var pendapatan : integer; var energi : integer);
+{I.S. Nama resep, daftar resep, daftar bahan mentah, daftar bahan olahan, dan pendapatan saat ini terdefinisi. Energi saat ini terdefinisi dan tervalidasi
+ F.S. Jika resep yang akan dijual valid, maka bahan mentah dan bahan olahan di inventori berkurang, pendapatan bertambah, dan energi berurang}
 	var {KAMUS LOKAL jualResep}
 		i : integer;
-		j, count : integer;
-	begin {ALGORITMA jualResep}	
+		j, p, count : integer;
+		bahan : string;
+	begin {ALGORITMA jualResep}
 		i := cariResep (resep, daftarResep);
 		if ( i = -1 ) then
-		begin
+		begin 
 			writeln ('Nama resep tidak ada di daftar resep !');
 		end else {Nama resep ada di daftar resep}
+			count := 0;
 			{Mengecek validitas bahan bahan mentah penyusun resep}
-			
 			for j:=1 to daftarResep.tab[i].nmentah do
 			begin
-				
-			if (isBahanMentahValid (daftarResep.tab[i].
-		end;
-	end;
-	
+				bahan := daftarResep.tab[i].partmentah[j].nama;
+				if ( not(isBahanMentahValid(bahan,1,daftarBahanM)) ) then //Berdasarkan spesifikasi soal,
+				begin											          //Diasumsikan n =1
+					count := count + 1;
+				end;
+			end;
+			if (count > 0) then
+			begin
+				writeln ('Bahan mentah yang diperlukan untuk membuat resep tidak ada di daftar bahan mentah atau jumlahnya tidak mencukupi');
+			end else
+			begin
+				{Mengecek validitas bahan bahan olahan penyusun resep}
+				for j:=1 to daftarResep.tab[i].nolahan do
+				begin
+					bahan := daftarResep.tab[i].partolahan[j].nama;
+					if ( not(isBahanOlahanValid(bahan,1,daftarBahanO)) ) then //Berdasarkan spesifikasi soal,
+					begin											          //Diasumsikan n =1
+						count := count + 1;
+					end;
+				end;
+				if (count > 0) then
+				begin
+					writeln ('Bahan olahan yang diperlukan untuk membuat resep tidak ada di daftar bahan olahan atau jumlahnya tidak mencukupi');
+				end else
+				begin
+					{Nama resep, bahan mentah penyusun, dan bahan olahan penyusun sudah valid}
+					
+					{Mengurangi bahan mentah di inventori}
+					for j:=1 to daftarResep.tab[i].nmentah do
+					begin
+						bahan := daftarResep.tab[i].partmentah[j].nama;
+						p := cariBahanMentah(bahan, daftarBahanM);
+						daftarBahanM.tab[p].jumlah := daftarBahanM.tab[p].jumlah - 1;
+					end;
+
+					{Mengurangi bahan olahan di inventori}
+					for j:=1 to daftarResep.tab[i].nolahan do
+					begin
+						bahan := daftarResep.tab[i].partolahan[j].nama;
+						p := cariBahanOlahan(bahan, daftarBahanO);
+						daftarBahanO.tab[p].jumlah := daftarBahanO.tab[p].jumlah - 1;
+					end;
+					
+					{Menambah pendapatan berdasarkan harga jual resep}
+					pendapatan := pendapatan + daftarResep.tab[i].harga;
+					
+					writeln ('Resep ', resep, ' berhasil terjual. Pendapatan bertambah sebesar = ', daftarResep.tab[i].harga);
+					writeln ('Uang sekarang = ', pendapatan);
+					
+					{Mengurangi energi sebesar 1, terdefinisi di spesifikasi soal}
+					energi := energi - 1;
+				end;
+			end;
+		end;			
 end.
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
