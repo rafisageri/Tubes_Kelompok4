@@ -81,10 +81,10 @@ type
 	//tipe untuk file daftar resep//
 	resep = record
 		nama		: array [arrMin..arrMax] of char;
-		harga		: integer;
-		nmentah		: integer;
+		harga		: integer; {Harga jual dari hidangan yang bersangkutan}
+		nmentah		: integer; {Banyaknya bahan mentah berbeda yang menyusun resep}
 		partmentah	: array [arrMin..arrMax] of mentah;
-		nolahan         : integer; 
+		nolahan         : integer; {Banyaknya bahan olahan berbeda yang menyusun resep}
 		partolahan     	: array [arrMin..arrMax] of olahan;
 	end;
 	
