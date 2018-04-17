@@ -45,8 +45,6 @@ implementation
 						{INPUT KE INVENTORI}
 						b.tab[b.neff+1].nama := x.nama;
 						begin
-							tt:=Date;
-							DecodeDate(tt,yy,mm,dd);
 							b.tab[b.neff+1].tglbeli.hari:= tglNow.hari;
 							b.tab[b.neff+1].tglbeli.hari:= tglNow.bulan;
 							b.tab[b.neff+1].tglbeli.hari:= tglNow.tahun;

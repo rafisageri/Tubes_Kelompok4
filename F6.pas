@@ -104,8 +104,6 @@ implementation
 					e:= e-1;
 					b.tab[b.neff+1].nama := x.nama;
 					begin
-						tt:=Date;
-						DecodeDate(tt,yy,mm,dd);
 						b.tab[b.neff+1].tglbuat.hari:= tglNow.hari;
 						b.tab[b.neff+1].tglbuat.hari:= tglNow.bulan;
 						b.tab[b.neff+1].tglbuat.hari:= tglNow.tanggal;
