@@ -24,7 +24,6 @@ interface
 			list	: array [1..10] of simulasi;
 			neff	: integer;
 		end;
-		fileSimul = textfile;
 	
 	procedure pSimToArr(nfile: integer; nama:string; var arr: listSimulasi);
 	//I.S. terdapat textfile yang akan diassign ke inf.
@@ -37,9 +36,10 @@ interface
 	//menampilkan isi arr
 	
 implementation
+	
 	procedure pSimToArr(nfile: integer; nama:string; var arr: listSimulasi);
 	var
-		inf : fileSimul;
+		inf : textfile;
 		tempTgl, temp : string;
 		guardmark, l, slashmark, lTgl : integer;
 		tt, bb, hh : word;
@@ -58,6 +58,7 @@ implementation
 			l:= length(temp);
 			guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
 			arr.list[nfile].nomor := StrToInt( copy(temp, 1, (guardmark-2)) ); 		//assign nomor
+			
 
 			temp := copy (temp, guardmark+2, l); 						//truncate temp
 			l := l - guardmark - 1;										//panjang baru
@@ -96,9 +97,9 @@ implementation
 				arr.list[nfile].totalbahanbuat := 0;
 				arr.list[nfile].totalbahanjual := 0;
 				arr.list[nfile].totalresepjual := 0;
-				arr.list[nfile].pemasukan := 0;
+				arr.list[nfile].pemasukan := 5000000;//modal
 				arr.list[nfile].pengeluaran := 0;
-				arr.list[nfile].uang := 0;
+				arr.list[nfile].uang := 5000000;//modal
 			end
 			else
 			begin
@@ -153,7 +154,7 @@ implementation
 	//I.S. arr terdefinisi
 	//F.S. textfile inf terdefinisi
 	var
-		inf:fileSimul;
+		inf:textfile;
 		temp, dateStr : string;
 	begin
 
@@ -178,7 +179,6 @@ implementation
 		temp := temp + ' | ' + IntToStr(arr.list[nfile].pemasukan);
 		temp := temp + ' | ' + IntToStr(arr.list[nfile].pengeluaran);
 		temp := temp + ' | ' + IntToStr(arr.list[nfile].uang);
-		writeln(temp);
 		write(inf, temp);
 		close(inf);
 	end;
