@@ -2,11 +2,11 @@ unit F6;
 
 interface
 	uses typeuniverse, sysutils;
-	procedure olahBahan (o : tabOlahan; var a : tabInventoriM; var b : tabInventoriO; var e {energi} : integer);
+	procedure olahBahan (o : tabOlahan; var a : tabInventoriM; var b : tabInventoriO; var e {energi} : integer; tglNow: tanggal);
 	
 implementation
 	
-	procedure olahBahan (o : tabOlahan; var a : tabInventoriM; var b : tabInventoriO; var e {energi} : integer);
+	procedure olahBahan (o : tabOlahan; var a : tabInventoriM; var b : tabInventoriO; var e {energi} : integer; tglNow: tanggal);
 	var
 		x : olahan;
 		i, n, u, z, p, j, k, l : integer;
@@ -106,9 +106,9 @@ implementation
 					begin
 						tt:=Date;
 						DecodeDate(tt,yy,mm,dd);
-						b.tab[b.neff+1].tglbuat.hari:= dd;
-						b.tab[b.neff+1].tglbuat.hari:= mm;
-						b.tab[b.neff+1].tglbuat.hari:= yy;
+						b.tab[b.neff+1].tglbuat.hari:= tglNow.hari;
+						b.tab[b.neff+1].tglbuat.hari:= tglNow.bulan;
+						b.tab[b.neff+1].tglbuat.hari:= tglNow.tanggal;
 					end;
 					b.tab[b.neff+1].jumlah := n;
 					b.tab[b.neff+1].harga := o.tab[i].harga;

@@ -2,11 +2,11 @@ unit F5;
 
 interface
 	uses typeuniverse, sysutils;
-	procedure beliBahan ( a : tabMentah; var b : tabInventoriM; var c : tabInventoriO; var u {uang} : integer; var e {energi} : integer; var imax {inventori maks} : integer);
+	procedure beliBahan ( a : tabMentah; var b : tabInventoriM; var c : tabInventoriO; var u {uang} : integer; var e {energi} : integer; var imax {inventori maks} : integer; tglNow:tanggal);
 	
 implementation
 
-	procedure beliBahan ( a : tabMentah; var b : tabInventoriM; var c : tabInventoriO; var u {uang} : integer; var e {energi} : integer; var imax {inventori maks} : integer);
+	procedure beliBahan ( a : tabMentah; var b : tabInventoriM; var c : tabInventoriO; var u {uang} : integer; var e {energi} : integer; var imax {inventori maks} : integer; tglNow:tanggal);
 	var
 		x : mentah;
 		n, i : integer;
@@ -47,9 +47,9 @@ implementation
 						begin
 							tt:=Date;
 							DecodeDate(tt,yy,mm,dd);
-							b.tab[b.neff+1].tglbeli.hari:= dd;
-							b.tab[b.neff+1].tglbeli.hari:= mm;
-							b.tab[b.neff+1].tglbeli.hari:= yy;
+							b.tab[b.neff+1].tglbeli.hari:= tglNow.hari;
+							b.tab[b.neff+1].tglbeli.hari:= tglNow.bulan;
+							b.tab[b.neff+1].tglbeli.hari:= tglNow.tahun;
 						end;
 						b.tab[b.neff+1].jumlah := n;
 						b.neff := b.neff+1;
