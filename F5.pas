@@ -11,8 +11,6 @@ implementation
 		x : mentah;
 		n, i : integer;
 		cek : boolean;
-		tt : TDateTime;
-		dd,mm,yy : word;
 	begin
 		writeln('>> Beli bahan:'); {INPUT NAMA}
 		readln(x.nama);
