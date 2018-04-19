@@ -45,6 +45,7 @@ implementation
 	    found := true; 
 	    end else //input selain "-"
 	    found := false; 
+	    i := i + 1;
   end; 
   
   MentahResep.neff := i - 1; //jumlah dari bahan mentah yang dibutuhkan
@@ -57,7 +58,9 @@ implementation
 	  if (OlahanResep.bahan[i] = '-') then begin  
 	    found := true; 
 	  end else //masukkan selain "-"
-	    found := false; 
+	    found := false;
+	    i := i + 1;
+	   
   end; 
   
   OlahanResep.neff := i - 1; // jumlah dari bahan olahan yang dibutuhkan
@@ -70,7 +73,7 @@ implementation
   Function IsResepAda(ResepJadi : tabresep; NamaResep : string) : boolean; 
   {I.S. nama resep terdefinisi}
   {F.S. mengeluarkan nilai boolean true jika resep sudah ada dan false jika belum}
-  {fungsi untuk menentukan apakahg nama resep yang dimasukan pengguna sudah ada atau belum}
+  {fungsi untuk menentukan apakah nama resep yang dimasukan pengguna sudah ada atau belum}
   
   var //Kamus lokal
   Found : boolean;
