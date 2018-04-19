@@ -8,7 +8,6 @@ implementation
 procedure istirahat (var daftarsimulasi: listSimulasi; N: integer; var nistirahat: integer);
 
 begin
-		nistirahat := 0;
 		if (daftarsimulasi.list[N].energi >= 10) or (nistirahat >= 6) then
 	begin
 		writeln('Anda tidak dapat beristirahat lagi, telah mencapai batas maksimum!');
@@ -19,6 +18,7 @@ begin
 				daftarsimulasi.list[N].energi := 10;
 
 			nistirahat := nistirahat + 1;
+			writeln('Istirahat sukses');
 		end;
 end;
 end.
