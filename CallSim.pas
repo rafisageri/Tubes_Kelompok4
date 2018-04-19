@@ -13,8 +13,15 @@ unit CallSim;
 	TglHariIni tanggal
 	}
 interface
-	procedure Call0();
-	procedure Call1();
+	uses F5, F6, F7, F8, F9, F10, {F11,} F12, {F13F14,} F15, {F16, F17,} typeuniverse;
+	procedure Call0(var simN	: integer;
+					var eoSim	: boolean;
+					var eoProg	: boolean;
+					var DftrSim : listSimulasi;
+					var DftrResep	: tabResep;
+					var DftrMentah	: tabMentah;
+					var DftrOlahan	: tabOlahan);
+	//procedure Call1();
 	
 implementation
 	procedure Call0(var simN	: integer;
@@ -41,7 +48,7 @@ implementation
 			writeln('Mulai simulasi ', simN);
 			eoSim:=False;
 		end
-		else if s='lihatInventori' then //F13
+		{else if s='lihatInventori' then //F13
 		begin
 			writeln('Inventori simulasi berapa yang ingin dilihat?');
 			readln(simN);
@@ -51,15 +58,15 @@ implementation
 		else if s='lihatResep' then //F14
 		begin
 			lihatResep(DftrResep);
-		end
+		end}
 		else if s='cariResep' then //F15
 		begin
 			cariResep(DftrResep);
 		end
-		else if s='tambahResep' then //F16
+		{else if s='tambahResep' then //F16 //Ada parameter inputan user
 		begin
-			tambahResep(DftrMentah, DftrOlahan; DftrResep);
-		end
+			tambahResep(DftrMentah, DftrOlahan, DftrResep);
+		end}
 		else if s='upgradeInventori' then //F17
 		begin
 			writeln('Inventori simulasi berapa yang ingin di-upgrade?');
@@ -72,7 +79,7 @@ implementation
 			writeln('Command salah');
 		end;
 	end;
-
+{
 	procedure Call1(var simN	: integer;
 					var nMakan	: integer;
 					var nIstirahat : integer;
@@ -216,5 +223,5 @@ implementation
 		begin
 			writeln('command salah');
 		end;
-	end;
+	end;}
 end.
