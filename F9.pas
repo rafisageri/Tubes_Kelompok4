@@ -11,7 +11,6 @@ procedure makan(var daftarsimulasi: listSimulasi; N: integer; var nmakan : integ
 //Xmakan juga bernilai 0 pada hari berikutnya (setelah tidur)
 
 begin				
-	nmakan := 0;
 	if (daftarsimulasi.list[N].energi >=10) or (nmakan >=3) then
 	begin
 	writeln('Maaf, Anda tidak dapat makan lagi'); //tidak dapat makan karena energi sudah penuh atau sudah 3 kali makan
