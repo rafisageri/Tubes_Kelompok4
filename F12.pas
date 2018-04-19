@@ -5,26 +5,6 @@ interface
 	uses
 		typeuniverse,
 		sysutils;
-	type
-		simulasi = record
-			nomor			: integer;
-			awalsim			: tanggal;
-			totalhari		: integer;
-			energi			: integer;
-			kapasitas		: integer;
-			totalmentahbeli	: integer;
-			totalbahanbuat	: integer;
-			totalbahanjual	: integer;
-			totalresepjual	: integer;
-			pemasukan		: integer;
-			pengeluaran		: integer;
-			uang			: integer;
-		end;		
-		listSimulasi = record
-			list	: array [1..10] of simulasi;
-			neff	: integer;
-		end;
-	
 	procedure pSimToArr(nfile: integer; nama:string; var arr: listSimulasi);
 	//I.S. terdapat textfile yang akan diassign ke inf.
 	//F.S. arr terisi
