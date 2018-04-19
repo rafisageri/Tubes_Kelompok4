@@ -34,7 +34,9 @@ var
 begin
 	Nkad:= 0;
 	for i:=1 to invenMentah.Neff do
-	begin
+	begin	
+		////////////////////////////////////////////////////////////////////////////
+		//CEK INI
 		if (simulasi.simulasi[N].awalsim.tanggal.hari >= InvenMentah.InventoriM[i].tglbeli.hari + cariKadaluarsa(invenMentah.inventoriM[i].nama, daftarMentah)) then
 		begin
 			Temp.nama := invenMentah.inventoriM[i].nama;
