@@ -20,6 +20,7 @@ begin
 			if (daftarsimulasi.list[N].energi > 10) then 
 				daftarsimulasi.list[N].energi := 10;
 			nmakan := nmakan + 1;
+			writeln('Makan sukses');
 		end;
 end;
 end.
