@@ -12,7 +12,7 @@ interface
 
   procedure TambahPendapatanOlahan(var Pendapatan : integer; JumlahJualO : integer; BahanOlahan : ListInventoriO; Nsim : integer; i : integer); //Pendapatan merupakan var pada program utama 
   
-  Procedure MenjualOlahan(var BahanOlahan : ListInventoriO; var Energi : integer; var Pendapatan : integer; Nsim : integer);
+  Procedure JualOlahan(var BahanOlahan : ListInventoriO; var Energi : integer; var Pendapatan : integer; Nsim : integer);
   
 implementation 
 
@@ -66,7 +66,7 @@ implementation
   end;
   
   
-  Procedure MenjualOlahan(var BahanOlahan : ListInventoriO; var Energi : integer; var Pendapatan : integer; Nsim : integer);
+  Procedure JualOlahan(var BahanOlahan : ListInventoriO; var Energi : integer; var Pendapatan : integer; Nsim : integer);
   // Prosedur untuk menjual bahan olahan secara utuh 
   
   var // Kamus lokal
