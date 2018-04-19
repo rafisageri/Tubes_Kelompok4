@@ -1,11 +1,13 @@
 program main;
 uses
+	F1,
+	F12,
 	typeuniverse,
 	Penanggalan,
 	CallSim;
 var
-	nMakan{jumlah makan dilakukan}, nIstirahat{jumlah istirahat dilakukan}, simN : integer{simulasi yg akan dijalankan};
-	eoDay, eoSim, eoProg : Boolean;
+	i, nMakan{jumlah makan dilakukan}, nIstirahat{jumlah istirahat dilakukan}, simN : integer{simulasi yg akan dijalankan};
+	bTidur, eoDay, eoSim, eoProg : Boolean;
 	
 	TglHariIni	: tanggal;
 	DftrResep	: tabResep;
@@ -72,7 +74,7 @@ begin
 		//inisialisasi eoSim := false ada di Call0, startSimulasi
 		if not(eoSim) then		//hari sebenernya ada di array
 		begin
-			TglHariIni:=DftrSim.list
+			TglHariIni:=DftrSim.list[simN].awalsim;
 			
 			if DftrSim.list[simN].totalhari >10 then
 			begin
@@ -80,9 +82,10 @@ begin
 				writeln('Simulasi tidak dapat dilanjutkan');
 				lihatStatistik(simN, DftrSim);
 				eoSim:=True;
-			else if DftrSim.list[simN].totalhari>=1 and not(eoSim) then
+			end
+			else if (DftrSim.list[simN].totalhari>=1) and not(eoSim) then
 			begin
-				for i:=1 to hari do
+				for i:=1 to DftrSim.list[simN].totalhari do
 				GantiHari(TglHariIni);
 			end;
 			//if DftrSim.list[simN].totalhari =0, TglHariIni sudah siap pakai
@@ -100,22 +103,22 @@ begin
 			
 			//dalam suatu hari
 			repeat 
-				if energi=0 then
+				if DftrSim.list[simN].energi=0 then
 				begin
 					writeln('Energi habis, anda hanya dapat tidur');
 					writeln('> Tidur');
-					tidur(bTidur, energi, eoDay, invMentah, invOlahan);
+					//tidur(bTidur, energi, eoDay, invMentah, invOlahan);
 				end	
 				else //energi <>0
 				begin
-					Call1(simN, nMakan, nIstirahat, eoSim, eoDay, DftrSim, DftrResep, DftrMentah, DftrOlahan, invMentah, invOlahan,	TglHariIni	: tanggal); 
+					//Call1(simN, nMakan, nIstirahat, eoSim, eoDay, DftrSim, DftrResep, DftrMentah, DftrOlahan, invMentah, invOlahan,	TglHariIni	: tanggal); 
 					//uses callSim, main action
 				end;
 			until eoDay or eoSim;
 			
 			if not(eoSim) then
 			begin
-				hari:= hari+1;
+				DftrSim.list[simN].totalhari:= DftrSim.list[simN].totalhari+1;
 				GantiHari(TglHariIni);
 			end;
 			
@@ -123,7 +126,7 @@ begin
 		
 		//save disini, sekaligus implementasi F2-exit (save data)
 		//walaupun simulasi tidak berjalan, data mungkin berubah
-		
+		{
 		//save data simulasi
 		SaveFileSimulasi(1, 'simul1.txt', DftrSim);
 		SaveFileSimulasi(2, 'simul2.txt', DftrSim);
@@ -135,7 +138,7 @@ begin
 		SaveFileSimulasi(8, 'simul8.txt', DftrSim);
 		SaveFileSimulasi(9, 'simul9.txt', DftrSim);
 		SaveFileSimulasi(10, 'simul10.txt', DftrSim);
-		{
+		
 		//save Inventori Bahan Mentah
 		SaveInventoriBahanMentah(1, 'inventoribahanmentah1.txt', invMentah);
 		SaveInventoriBahanMentah(2, 'inventoribahanmentah2.txt', invMentah);
@@ -159,7 +162,7 @@ begin
 		SaveInventoriBahanOlahan(8, 'inventoribahanolahan8.txt', invOlahan);
 		SaveInventoriBahanOlahan(9, 'inventoribahanolahan9.txt', invOlahan);
 		SaveInventoriBahanOlahan(10, 'inventoribahanolahan10.txt', invOlahan);
-		}
+		
 		//save Daftar Bahan Mentah di Supermarket
 		SaveBahanMentah(DftrMentah);
 		//p.s.: is this really necessary?
@@ -169,7 +172,7 @@ begin
 		//p.s.: is this really necessary?
 		
 		//save Daftar Resep
-		SaveResep(DftrResep, DftrMentah, DftrOlahan);
+		SaveResep(DftrResep, DftrMentah, DftrOlahan);}
 	until eoProg = True;
 	
   
