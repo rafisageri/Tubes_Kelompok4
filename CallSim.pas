@@ -13,7 +13,7 @@ unit CallSim;
 	TglHariIni tanggal
 	}
 interface
-	uses F5, F6, F7, F8, F9, F10, {F11,} F12, {F13F14,} F15, {F16, F17,} typeuniverse;
+uses F5, F6, F7, F8, F9, F10, {F11,} F12, {F13F14,} F15, {F16,} F17, typeuniverse;
 	procedure Call0(var simN	: integer;
 					var eoSim	: boolean;
 					var eoProg	: boolean;
