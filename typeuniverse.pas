@@ -115,9 +115,9 @@ type
 		totalbahanbuat		: integer;
 		totalbahanjual		: integer;
 		totalresepjual		: integer;
-		pemasukan		: integer;
-		pengeluaran		: integer;
-		uang			: integer;
+		pemasukan		: longint;
+		pengeluaran		: longint;
+		uang			: longint;
 	end;
 	
 	listSimulasi = record
