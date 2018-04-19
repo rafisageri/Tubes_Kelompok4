@@ -14,9 +14,9 @@ implementation
 		tt : TDateTime;
 		dd,mm,yy : word;
 	begin
-		writeln('Beli bahan:'); {INPUT NAMA}
+		writeln('>> Beli bahan:'); {INPUT NAMA}
 		readln(x.nama);
-		writeln('Jumlah:'); {INPUT JUMLAH}
+		writeln('>> Jumlah:'); {INPUT JUMLAH}
 		readln(n);
 		
 		i:=1;

@@ -13,7 +13,7 @@ implementation
 		cek : boolean;
 		
 	begin
-		writeln('Cari resep:'); {INPUT RESEP}
+		writeln('>> Cari resep:'); {INPUT RESEP}
 		readln(x.nama);
 		i :=1;
 		cek := false;

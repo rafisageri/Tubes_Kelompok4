@@ -95,12 +95,14 @@ type
 	//////////////////////////////////
 	//tipe untuk fungsi tambah resep//
 	Mresep = record 
-	        bahan : array [arrMin..arrMax] of string;
+        bahan : array [arrMin..arrMax] of string;
 		neff  : integer; 
-		
-        Oresep = record 
-	        bahan : array [arrMin..arrMax] of string; 
-		neff  : integer; 
+	end;
+
+    Oresep = record 
+	    bahan : array [arrMin..arrMax] of string; 
+		neff  : integer;
+	end; 
 	////////////////////////////////////
 	//tipe untuk file daftar informasi//
 	simulasi = record

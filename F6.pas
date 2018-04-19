@@ -13,15 +13,13 @@ implementation
 		cek : boolean;
 		gada : boolean;
 		beres : boolean;
-		tt : TDateTime;
-		dd,mm,yy : word;
 		tabSum : array[1..100] of integer;
 		sum : integer;
 		
 	begin
-		writeln('Buat olahan:'); {INPUT NAMA}
+		writeln('>> Buat olahan:'); {INPUT NAMA}
 		readln(x.nama);
-		writeln('Jumlah:'); {INPUT JUMLAH}
+		writeln('>> Jumlah:'); {INPUT JUMLAH}
 		readln(n);
 		
 		{CEK YANG MAU DIBUAT ADA DI OLAHAN GAK}
@@ -106,7 +104,7 @@ implementation
 					begin
 						b.tab[b.neff+1].tglbuat.hari:= tglNow.hari;
 						b.tab[b.neff+1].tglbuat.hari:= tglNow.bulan;
-						b.tab[b.neff+1].tglbuat.hari:= tglNow.tanggal;
+						b.tab[b.neff+1].tglbuat.hari:= tglNow.tahun;
 					end;
 					b.tab[b.neff+1].jumlah := n;
 					b.tab[b.neff+1].harga := o.tab[i].harga;

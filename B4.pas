@@ -10,7 +10,7 @@ implementation
 	begin
 		if (a.ntot+b.ntot+9<= imax) then {KALAU INVENTORI MASIH CUKUP -> RESTOCK, KALAU ENGGA GAK AJDI}
 		begin
-			if (s.tab[n].totalhari = 3) or (s.tab[n].totalhari = 6) or (s.tab[n].totalhari = 9) then {SETIAP 3 HARI}
+			if (s.list[n].totalhari = 3) or (s.list[n].totalhari = 6) or (s.list[n].totalhari = 9) then {SETIAP 3 HARI}
 			begin
 				a.tab[a.neff+1].nama := a.tab[1].nama;
 				a.tab[a.neff+1].tglbeli.hari := 000; {KALAU RESTOCK MAKA TANGGALNYA JADI 000 UNTUK MEMBEDAKAN}
