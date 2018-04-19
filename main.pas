@@ -1,9 +1,10 @@
 program main;
 uses
-	typeuniverse;
+	typeuniverse,
+	Penanggalan,
 	CallSim;
 var
-	energi, hari, nMakan{jumlah kesempatan makan}, nIstirahat{jumlah kesempatan Istirahat}, nTidur {jumlah kesempatan tidur}, simN : integer{simulasi yg akan dijalankan};
+	nMakan{jumlah makan dilakukan}, nIstirahat{jumlah istirahat dilakukan}, simN : integer{simulasi yg akan dijalankan};
 	eoDay, eoSim, eoProg : Boolean;
 	
 	TglHariIni	: tanggal;
@@ -16,44 +17,85 @@ var
 	
 begin
 	writeln('> load');
-	//read file ke array here
-	pArrToSim(1, 'simul1.txt', DftrSim;
-	pArrToSim(2, 'simul2.txt', DftrSim;
-	pArrToSim(3, 'simul3.txt', DftrSim;
-	pArrToSim(4, 'simul4.txt', DftrSim;
-	pArrToSim(5, 'simul5.txt', DftrSim;
-	pArrToSim(6, 'simul6.txt', DftrSim;
-	pArrToSim(7, 'simul7.txt', DftrSim;
-	pArrToSim(8, 'simul8.txt', DftrSim;
-	pArrToSim(9, 'simul9.txt', DftrSim;
-	pArrToSim(10, 'simul10.txt', DftrSim;
-	
+	//read data simulasi
+	LoadFileSimulasi(1, 'simul1.txt', DftrSim);
+	LoadFileSimulasi(2, 'simul2.txt', DftrSim);
+	LoadFileSimulasi(3, 'simul3.txt', DftrSim);
+	LoadFileSimulasi(4, 'simul4.txt', DftrSim);
+	LoadFileSimulasi(5, 'simul5.txt', DftrSim);
+	LoadFileSimulasi(6, 'simul6.txt', DftrSim);
+	LoadFileSimulasi(7, 'simul7.txt', DftrSim);
+	LoadFileSimulasi(8, 'simul8.txt', DftrSim);
+	LoadFileSimulasi(9, 'simul9.txt', DftrSim);
+	LoadFileSimulasi(10, 'simul10.txt', DftrSim);
+	{
+	//read Inventori Bahan Mentah
+	LoadInventoriBahanMentah(1, 'inventoribahanmentah1.txt', invMentah);
+	LoadInventoriBahanMentah(2, 'inventoribahanmentah2.txt', invMentah);
+	LoadInventoriBahanMentah(3, 'inventoribahanmentah3.txt', invMentah);
+	LoadInventoriBahanMentah(4, 'inventoribahanmentah4.txt', invMentah);
+	LoadInventoriBahanMentah(5, 'inventoribahanmentah5.txt', invMentah);
+	LoadInventoriBahanMentah(6, 'inventoribahanmentah6.txt', invMentah);
+	LoadInventoriBahanMentah(7, 'inventoribahanmentah7.txt', invMentah);
+	LoadInventoriBahanMentah(8, 'inventoribahanmentah8.txt', invMentah);
+	LoadInventoriBahanMentah(9, 'inventoribahanmentah9.txt', invMentah);
+	LoadInventoriBahanMentah(10, 'inventoribahanmentah10.txt', invMentah);
 
+	//read Inventori Bahan Olahan
+	LoadInventoriBahanOlahan(1, 'inventoribahanolahan1.txt', invOlahan);
+	LoadInventoriBahanOlahan(2, 'inventoribahanolahan2.txt', invOlahan);
+	LoadInventoriBahanOlahan(3, 'inventoribahanolahan3.txt', invOlahan);
+	LoadInventoriBahanOlahan(4, 'inventoribahanolahan4.txt', invOlahan);
+	LoadInventoriBahanOlahan(5, 'inventoribahanolahan5.txt', invOlahan);
+	LoadInventoriBahanOlahan(6, 'inventoribahanolahan6.txt', invOlahan);
+	LoadInventoriBahanOlahan(7, 'inventoribahanolahan7.txt', invOlahan);
+	LoadInventoriBahanOlahan(8, 'inventoribahanolahan8.txt', invOlahan);
+	LoadInventoriBahanOlahan(9, 'inventoribahanolahan9.txt', invOlahan);
+	LoadInventoriBahanOlahan(10, 'inventoribahanolahan10.txt', invOlahan);
+	}
+	//read Daftar Bahan Mentah di Supermarket
+	LoadBahanMentah(DftrMentah);
+	
+	//read Daftar Bahan Olahan
+	LoadBahanOlahan(DftrOlahan);
+	
+	//read Daftar Resep
+	LoadResep(DftrResep, DftrMentah, DftrOlahan);
 	
 	repeat
-		hari := 999 //inisialisasi sebelum assign nilai faktual dari array
 		eoSim:=True; //belum tentu simulasi dijalankan
 	
-		//Call0 here
+
 		//Uses callSim, preSimulasi action here
-		Call0();
+		Call0(simN, eoSim, eoProg, DftrSim, DftrResep, DftrMentah,DftrOlahan);
 		
-		//validasi hari
 		//inisialisasi eoSim := false ada di Call0, startSimulasi
-		if hari>=10 and not(eoSim) then		//hari sebenernya ada di array
+		if not(eoSim) then		//hari sebenernya ada di array
 		begin
-			writeln('Simulasi sudah melewati 10 hari');
-			writeln('Simulasi tidak dapat dilanjutkan');
-			lihatStatistik(simN, DftrSim);
-			eoSim:=True;
+			TglHariIni:=DftrSim.list
+			
+			if DftrSim.list[simN].totalhari >10 then
+			begin
+				writeln('Simulasi sudah melewati 10 hari');
+				writeln('Simulasi tidak dapat dilanjutkan');
+				lihatStatistik(simN, DftrSim);
+				eoSim:=True;
+			else if DftrSim.list[simN].totalhari>=1 and not(eoSim) then
+			begin
+				for i:=1 to hari do
+				GantiHari(TglHariIni);
+			end;
+			//if DftrSim.list[simN].totalhari =0, TglHariIni sudah siap pakai
 		end;
+		
 		
 		//dalam suatu simulasi
 		while not(eoSim) and not(eoProg) do
 		begin
+			//awal hari, inisialisasi
 			eoDay:= false;
-			nIstirahat :=6;
-			nMakan :=3;
+			nIstirahat :=0;
+			nMakan :=0;
 			bTidur := false;
 			
 			//dalam suatu hari
@@ -66,33 +108,69 @@ begin
 				end	
 				else //energi <>0
 				begin
-					Call1(); //uses callSim, main action
+					Call1(simN, nMakan, nIstirahat, eoSim, eoDay, DftrSim, DftrResep, DftrMentah, DftrOlahan, invMentah, invOlahan,	TglHariIni	: tanggal); 
+					//uses callSim, main action
 				end;
 			until eoDay or eoSim;
 			
 			if not(eoSim) then
 			begin
-				hari:= hari+1; 
+				hari:= hari+1;
+				GantiHari(TglHariIni);
 			end;
 			
 		end; //eoSim
 		
 		//save disini, sekaligus implementasi F2-exit (save data)
 		//walaupun simulasi tidak berjalan, data mungkin berubah
-		pArrToSim(1, 'simul1.txt', DftrSim;
-		pArrToSim(2, 'simul2.txt', DftrSim;
-		pArrToSim(3, 'simul3.txt', DftrSim;
-		pArrToSim(4, 'simul4.txt', DftrSim;
-		pArrToSim(5, 'simul5.txt', DftrSim;
-		pArrToSim(6, 'simul6.txt', DftrSim;
-		pArrToSim(7, 'simul7.txt', DftrSim;
-		pArrToSim(8, 'simul8.txt', DftrSim;
-		pArrToSim(9, 'simul9.txt', DftrSim;
-		pArrToSim(10, 'simul10.txt', DftrSim;
-	
 		
-	
-	until eoprog = True;
+		//save data simulasi
+		SaveFileSimulasi(1, 'simul1.txt', DftrSim);
+		SaveFileSimulasi(2, 'simul2.txt', DftrSim);
+		SaveFileSimulasi(3, 'simul3.txt', DftrSim);
+		SaveFileSimulasi(4, 'simul4.txt', DftrSim);
+		SaveFileSimulasi(5, 'simul5.txt', DftrSim);
+		SaveFileSimulasi(6, 'simul6.txt', DftrSim);
+		SaveFileSimulasi(7, 'simul7.txt', DftrSim);
+		SaveFileSimulasi(8, 'simul8.txt', DftrSim);
+		SaveFileSimulasi(9, 'simul9.txt', DftrSim);
+		SaveFileSimulasi(10, 'simul10.txt', DftrSim);
+		{
+		//save Inventori Bahan Mentah
+		SaveInventoriBahanMentah(1, 'inventoribahanmentah1.txt', invMentah);
+		SaveInventoriBahanMentah(2, 'inventoribahanmentah2.txt', invMentah);
+		SaveInventoriBahanMentah(3, 'inventoribahanmentah3.txt', invMentah);
+		SaveInventoriBahanMentah(4, 'inventoribahanmentah4.txt', invMentah);
+		SaveInventoriBahanMentah(5, 'inventoribahanmentah5.txt', invMentah);
+		SaveInventoriBahanMentah(6, 'inventoribahanmentah6.txt', invMentah);
+		SaveInventoriBahanMentah(7, 'inventoribahanmentah7.txt', invMentah);
+		SaveInventoriBahanMentah(8, 'inventoribahanmentah8.txt', invMentah);
+		SaveInventoriBahanMentah(9, 'inventoribahanmentah9.txt', invMentah);
+		SaveInventoriBahanMentah(10, 'inventoribahanmentah10.txt', invMentah);
+
+		//save Inventori Bahan Olahan
+		SaveInventoriBahanOlahan(1, 'inventoribahanolahan1.txt', invOlahan);
+		SaveInventoriBahanOlahan(2, 'inventoribahanolahan2.txt', invOlahan);
+		SaveInventoriBahanOlahan(3, 'inventoribahanolahan3.txt', invOlahan);
+		SaveInventoriBahanOlahan(4, 'inventoribahanolahan4.txt', invOlahan);
+		SaveInventoriBahanOlahan(5, 'inventoribahanolahan5.txt', invOlahan);
+		SaveInventoriBahanOlahan(6, 'inventoribahanolahan6.txt', invOlahan);
+		SaveInventoriBahanOlahan(7, 'inventoribahanolahan7.txt', invOlahan);
+		SaveInventoriBahanOlahan(8, 'inventoribahanolahan8.txt', invOlahan);
+		SaveInventoriBahanOlahan(9, 'inventoribahanolahan9.txt', invOlahan);
+		SaveInventoriBahanOlahan(10, 'inventoribahanolahan10.txt', invOlahan);
+		}
+		//save Daftar Bahan Mentah di Supermarket
+		SaveBahanMentah(DftrMentah);
+		//p.s.: is this really necessary?
+		
+		//save Daftar Bahan Olahan
+		SaveBahanOlahan(DftrOlahan);
+		//p.s.: is this really necessary?
+		
+		//save Daftar Resep
+		SaveResep(DftrResep, DftrMentah, DftrOlahan);
+	until eoProg = True;
 	
   
 	//terminasi
