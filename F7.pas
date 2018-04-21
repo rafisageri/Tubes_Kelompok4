@@ -17,7 +17,9 @@ interface
 implementation 
 
   procedure CariOlahan(JualO : String;  BahanOlahan : ListInventoriO; var FoundOlahan : Boolean; Nsim : integer; var i : integer); 
-  //Prosedur untuk mencari bahan olahan pada inventori, apakah bahan tersebut ada atau tidak pada inventori
+  {I.S. bahan olahan yang ingin dijual terdefinisi}
+  {F.S. bahan ditemukan atau tidak pada inventori bahan olahan}
+  {prosedur untuk mencari apakah suatu bahan olahan ada pada inventori sehingga bisa dijual}
 
   Begin //algoritma
   
@@ -32,8 +34,9 @@ implementation
    end;
    
   Procedure KurangiOlahan(BahanOlahan : ListInventoriO; Nsim : integer; i : integer);
-  //Prosedur untuk mengurangi jumlah bahan olahan pada inventori 
-  
+  {I.S. jumlah bahan olahan pada inventori terdefinisi (jika 0 maka tidak ada bahan olahan)}
+  {F.S. jumlah bahan olahan berkurang 1 dan total inventori berkurang 1}
+  {Prosedur untuk megurangi bahan olahan yang akan dijual}
   
   Begin //Algoritma
   
@@ -43,7 +46,9 @@ implementation
   end; 
   
   Procedure KurangiEnergi(var Energi : integer); 
-  //Prosedur untuk mengurangi energi saat melakukan satu kegiatan 
+  {I.S. jumlah energi terdefinisi}
+  {F.S. jumlah energi berkurang 1}
+  {prosedur untuk mengurangi energi setelah melakukan suatu aksi}
   begin //Algoritma 
   
   Energi := Energi - 1; 
@@ -51,7 +56,9 @@ implementation
   end; 
 
   Procedure TambahPendapatanOlahan(var Pendapatan : integer; JumlahJualO : integer; BahanOlahan : ListInventoriO; Nsim : integer; i : integer);
-  //Menambahkan Pendapatan saat menjual sesuatu
+  {I.S. Jumlah pendapatan terdefinisi}
+  {F.S. pendapatan bertambah}
+  {prosedur untuk menambahkan pendapatan setelah menjual sesuatu}
     
   begin //Algoritma
   
@@ -61,8 +68,9 @@ implementation
   
   
   Procedure JualOlahan(var BahanOlahan : ListInventoriO; var Energi : integer; var Pendapatan : integer; Nsim : integer);
-  // Prosedur untuk menjual bahan olahan secara utuh 
-  
+  {I.S. bahan olahan yang ingin dijual terdefinisi}
+  {F.S. bahan olahan terjual atau gagal karena beberapa faktor}
+  {keseluruhan prosedur untuk menjual suatu bahan olahan pada inventori}
   var // Kamus lokal
   i , JumlahJualO : integer;
   JualO : String; 
