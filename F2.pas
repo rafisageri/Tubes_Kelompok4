@@ -90,7 +90,7 @@ procedure SaveResep (resep : tabResep);
 		temp : string;
 		i,j : integer;
 	begin {ALGORITMA SaveResep}
-		assign (inf, 'daftarresep.txt');
+		assign (inf, 'resep.txt');
 		rewrite (inf);
 		{format isi data: Nama Resep | Harga Jual | N | Bahan-1 | Bahan-2 | Bahan-3 | … | Bahan-N }
 		for i:= 1 to resep.neff do
@@ -116,13 +116,13 @@ procedure SaveResep (resep : tabResep);
 	
 procedure SaveBahanOlahan (olahan : tabolahan);
 	{I.S. Tabel bahan olahan saat ini terdefinisi
-	 F.S. File eksternal 'daftarolahan.txt' berisi tabel bahan olahan saat ini}
+	 F.S. File eksternal 'bahanolahan.txt' berisi tabel bahan olahan saat ini}
 	var {KAMUS LOKAL SaveBahanOlahan}
 		inf : textfile;
 		temp : string;
 		i,j : integer;
 	begin {ALGORITMA SaveBahanOlahan}
-		assign (inf, 'daftarolahan.txt');
+		assign (inf, 'bahanolahan.txt');
 		rewrite (inf);
 		{format isi data: Nama Bahan Olahan | Harga Jual | N | Bahan-1 | Bahan-2 | Bahan-3 | … | Bahan-N }
 		for i:=1 to olahan.neff do
