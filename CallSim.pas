@@ -213,9 +213,7 @@ implementation
 		end
 		else if s='lihatInventori' then //F13
 		begin
-			writeln('Inventori simulasi berapa yang ingin dilihat?');
-			readln(simN);
-			writeln('Membaca Inventori simulasi ', simN);
+			writeln('Membaca Inventori simulasi';
 			lihatInventori(invMentah.list[simN], invOlahan.list[simN]);
 		end
 		else if s='lihatResep' then //F14
@@ -232,8 +230,6 @@ implementation
 		end
 		else if s='upgradeInventori' then //F17
 		begin
-			writeln('Inventori simulasi berapa yang ingin di-upgrade?');
-			readln(simN);
 			writeln('Meng-upgrade inventori simulasi ', simN);
 			upgradeInventori(DftrSim.list[simN].kapasitas);
 		end
