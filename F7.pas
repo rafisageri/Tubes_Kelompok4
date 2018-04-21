@@ -6,7 +6,7 @@ interface
   
   procedure CariOlahan(JualO : String; BahanOlahan : ListInventoriO; var FoundOlahan : Boolean; Nsim : integer; var i : integer); //JualO dan FoundOlahan var pada program utama. Nsim menunjukan nomor simulasi 
   
-  procedure KurangiOlahan(JumlahJualO : integer;  BahanOlahan : ListInventoriO; var CountOlahan : Boolean; Nsim : integer; i : integer); //JumlahJualO, Olahan, dan Foundolahan var pada program utama 
+  procedure KurangiOlahan(BahanOlahan : ListInventoriO; Nsim : integer; i : integer); //JumlahJualO, Olahan, dan Foundolahan var pada program utama 
 
   procedure KurangiEnergi(var Energi : integer); //Energi dan Foundolahan merupakan var pada program utama 
 
@@ -31,21 +31,15 @@ implementation
      until (foundOlahan) or (i > BahanOlahan.list[Nsim].neff) //looping akan berhenti juga bahan olahan masukan ada pada inventori atau saat tidak ditemukan sampai array ke neff
    end;
    
-  Procedure KurangiOlahan(JumlahJualO : integer; BahanOlahan : ListInventoriO; var CountOlahan : Boolean; Nsim : integer; i : integer);
+  Procedure KurangiOlahan(BahanOlahan : ListInventoriO; Nsim : integer; i : integer);
   //Prosedur untuk mengurangi jumlah bahan olahan pada inventori 
   
   
   Begin //Algoritma
   
-    CountOlahan := False;
-    
-	       if (BahanOlahan.list[Nsim].tab[i].jumlah >= JumlahJualO) and (BahanOlahan.list[Nsim].tab[i].jumlah <> 0) then begin 
-		     BahanOlahan.list[Nsim].tab[i].jumlah := BahanOlahan.list[Nsim].tab[i].jumlah - JumlahJualO;
-			 BahanOlahan.list[Nsim].ntot := BahanOlahan.list[Nsim].ntot - JumlahJualO;
-			 CountOlahan := True ;
-		   end else CountOlahan := False; 
-	  
-     
+  BahanOlahan.list[Nsim].tab[i].jumlah := BahanOlahan.list[Nsim].tab[i].jumlah - 1;
+	 BahanOlahan.list[Nsim].ntot := BahanOlahan.list[Nsim].ntot - 1;
+			  
   end; 
   
   Procedure KurangiEnergi(var Energi : integer); 
@@ -72,7 +66,7 @@ implementation
   var // Kamus lokal
   i , JumlahJualO : integer;
   JualO : String; 
-  FoundOlahan , CountOlahan : Boolean; 
+  FoundOlahan : Boolean; 
   begin //Algoritma 
   
   Write('>> Nama Bahan Olahan : ');
@@ -88,13 +82,10 @@ implementation
   if (not(FoundOlahan)) then begin
      Writeln('Penjualan gagal, bahan olahan tidak ditemukan'); 
   end else begin 
-         KurangiOlahan(JumlahJualO, BahanOlahan, CountOlahan, Nsim, i); 
+         KurangiOlahan(BahanOlahan, Nsim, i); 
          if (BahanOlahan.list[nsim].tab[i].jumlah = 0) then begin 
             writeln('Penjualan gagal, bahan olahan tidak ditemukan'); 
-         end else begin
-		   if (not(CountOlahan)) then begin 
-              writeln('Penjualan gagal, bahan olahan di inventori tidak mencukupi');
-           end else begin  			   
+         end else begin		 	   
               KurangiEnergi(energi);
               TambahPendapatanOlahan(Pendapatan, JumlahJualO, BahanOlahan, Nsim, i); 
 		      Writeln('Penjualan berhasil');
