@@ -2,11 +2,11 @@ unit F5;
 
 interface
 	uses typeuniverse, sysutils;
-	procedure beliBahan ( a : tabMentah; var b : tabInventoriM; var c : tabInventoriO; var u {uang} : integer; var e {energi} : integer; var imax {inventori maks} : integer; tglNow:tanggal);
+	procedure beliBahan ( a : tabMentah; var b : tabInventoriM; var c : tabInventoriO; var u {uang} : longint; var e {energi} : integer; var imax {inventori maks} : integer; tglNow:tanggal);
 	
 implementation
 
-	procedure beliBahan ( a : tabMentah; var b : tabInventoriM; var c : tabInventoriO; var u {uang} : integer; var e {energi} : integer; var imax {inventori maks} : integer; tglNow:tanggal);
+	procedure beliBahan ( a : tabMentah; var b : tabInventoriM; var c : tabInventoriO; var u {uang} : longint; var e {energi} : integer; var imax {inventori maks} : integer; tglNow:tanggal);
 	var
 		x : mentah;
 		n, i : integer;

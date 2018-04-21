@@ -1,6 +1,7 @@
 program main;
 uses
 	F1,
+	F2,
 	F12,
 	typeuniverse,
 	Penanggalan,
@@ -30,7 +31,7 @@ begin
 	LoadFileSimulasi(8, 'simul8.txt', DftrSim);
 	LoadFileSimulasi(9, 'simul9.txt', DftrSim);
 	LoadFileSimulasi(10, 'simul10.txt', DftrSim);
-	{
+
 	//read Inventori Bahan Mentah
 	LoadInventoriBahanMentah(1, 'inventoribahanmentah1.txt', invMentah);
 	LoadInventoriBahanMentah(2, 'inventoribahanmentah2.txt', invMentah);
@@ -126,7 +127,7 @@ begin
 		
 		//save disini, sekaligus implementasi F2-exit (save data)
 		//walaupun simulasi tidak berjalan, data mungkin berubah
-		{
+		
 		//save data simulasi
 		SaveFileSimulasi(1, 'simul1.txt', DftrSim);
 		SaveFileSimulasi(2, 'simul2.txt', DftrSim);
@@ -140,32 +141,28 @@ begin
 		SaveFileSimulasi(10, 'simul10.txt', DftrSim);
 		
 		//save Inventori Bahan Mentah
-		SaveInventoriBahanMentah(1, 'inventoribahanmentah1.txt', invMentah);
-		SaveInventoriBahanMentah(2, 'inventoribahanmentah2.txt', invMentah);
-		SaveInventoriBahanMentah(3, 'inventoribahanmentah3.txt', invMentah);
-		SaveInventoriBahanMentah(4, 'inventoribahanmentah4.txt', invMentah);
-		SaveInventoriBahanMentah(5, 'inventoribahanmentah5.txt', invMentah);
-		SaveInventoriBahanMentah(6, 'inventoribahanmentah6.txt', invMentah);
-		SaveInventoriBahanMentah(7, 'inventoribahanmentah7.txt', invMentah);
-		SaveInventoriBahanMentah(8, 'inventoribahanmentah8.txt', invMentah);
-		SaveInventoriBahanMentah(9, 'inventoribahanmentah9.txt', invMentah);
-		SaveInventoriBahanMentah(10, 'inventoribahanmentah10.txt', invMentah);
+		SaveInventoriMentah(1, 'inventoribahanmentah1.txt', invMentah);
+		SaveInventoriMentah(2, 'inventoribahanmentah2.txt', invMentah);
+		SaveInventoriMentah(3, 'inventoribahanmentah3.txt', invMentah);
+		SaveInventoriMentah(4, 'inventoribahanmentah4.txt', invMentah);
+		SaveInventoriMentah(5, 'inventoribahanmentah5.txt', invMentah);
+		SaveInventoriMentah(6, 'inventoribahanmentah6.txt', invMentah);
+		SaveInventoriMentah(7, 'inventoribahanmentah7.txt', invMentah);
+		SaveInventoriMentah(8, 'inventoribahanmentah8.txt', invMentah);
+		SaveInventoriMentah(9, 'inventoribahanmentah9.txt', invMentah);
+		SaveInventoriMentah(10, 'inventoribahanmentah10.txt', invMentah);
 
 		//save Inventori Bahan Olahan
-		SaveInventoriBahanOlahan(1, 'inventoribahanolahan1.txt', invOlahan);
-		SaveInventoriBahanOlahan(2, 'inventoribahanolahan2.txt', invOlahan);
-		SaveInventoriBahanOlahan(3, 'inventoribahanolahan3.txt', invOlahan);
-		SaveInventoriBahanOlahan(4, 'inventoribahanolahan4.txt', invOlahan);
-		SaveInventoriBahanOlahan(5, 'inventoribahanolahan5.txt', invOlahan);
-		SaveInventoriBahanOlahan(6, 'inventoribahanolahan6.txt', invOlahan);
-		SaveInventoriBahanOlahan(7, 'inventoribahanolahan7.txt', invOlahan);
-		SaveInventoriBahanOlahan(8, 'inventoribahanolahan8.txt', invOlahan);
-		SaveInventoriBahanOlahan(9, 'inventoribahanolahan9.txt', invOlahan);
-		SaveInventoriBahanOlahan(10, 'inventoribahanolahan10.txt', invOlahan);
-		
-		//save Daftar Bahan Mentah di Supermarket
-		SaveBahanMentah(DftrMentah);
-		//p.s.: is this really necessary?
+		SaveInventoriOlahan(1, 'inventoribahanolahan1.txt', invOlahan);
+		SaveInventoriOlahan(2, 'inventoribahanolahan2.txt', invOlahan);
+		SaveInventoriOlahan(3, 'inventoribahanolahan3.txt', invOlahan);
+		SaveInventoriOlahan(4, 'inventoribahanolahan4.txt', invOlahan);
+		SaveInventoriOlahan(5, 'inventoribahanolahan5.txt', invOlahan);
+		SaveInventoriOlahan(6, 'inventoribahanolahan6.txt', invOlahan);
+		SaveInventoriOlahan(7, 'inventoribahanolahan7.txt', invOlahan);
+		SaveInventoriOlahan(8, 'inventoribahanolahan8.txt', invOlahan);
+		SaveInventoriOlahan(9, 'inventoribahanolahan9.txt', invOlahan);
+		SaveInventoriOlahan(10, 'inventoribahanolahan10.txt', invOlahan);
 		
 		//save Daftar Bahan Olahan
 		SaveBahanOlahan(DftrOlahan);

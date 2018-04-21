@@ -13,15 +13,30 @@ unit CallSim;
 	TglHariIni tanggal
 	}
 interface
-uses F5, F6, F7, F8, F9, F10, {F11,} F12, {F13F14,} F15, {F16,} F17, typeuniverse;
+uses F5, F6, F7, F8, F9, F10, {F11,} F12, F13F14, F15, F16, F17, typeuniverse;
 	procedure Call0(var simN	: integer;
 					var eoSim	: boolean;
 					var eoProg	: boolean;
 					var DftrSim : listSimulasi;
 					var DftrResep	: tabResep;
 					var DftrMentah	: tabMentah;
-					var DftrOlahan	: tabOlahan);
-	//procedure Call1();
+					var DftrOlahan	: tabOlahan;
+					var invMentah	: listInventoriM;
+					var invOlahan	: listInventoriO);
+	
+	procedure Call1(var simN	: integer;
+					var nMakan	: integer;
+					var nIstirahat : integer;
+					var eoSim	: boolean;
+					var eoDay	: boolean;
+					var bTidur	: boolean;
+					var DftrSim : listSimulasi;
+					var DftrResep	: tabResep;
+					var DftrMentah	: tabMentah;
+					var DftrOlahan	: tabOlahan;
+					var invMentah	: listInventoriM;
+					var invOlahan	: listInventoriO;
+					var TglHariIni	: tanggal);
 	
 implementation
 	procedure Call0(var simN	: integer;
@@ -30,7 +45,9 @@ implementation
 					var DftrSim : listSimulasi;
 					var DftrResep	: tabResep;
 					var DftrMentah	: tabMentah;
-					var DftrOlahan	: tabOlahan);
+					var DftrOlahan	: tabOlahan;
+					var invMentah	: listInventoriM;
+					var invOlahan	: listInventoriO);
 	var
 		s: string;
 	begin
@@ -48,25 +65,25 @@ implementation
 			writeln('Mulai simulasi ', simN);
 			eoSim:=False;
 		end
-		{else if s='lihatInventori' then //F13
+		else if s='lihatInventori' then //F13
 		begin
 			writeln('Inventori simulasi berapa yang ingin dilihat?');
 			readln(simN);
 			writeln('Membaca Inventori simulasi ', simN);
-			lihatInventori(simN, DftrSim);
+			lihatInventori(invMentah.list[simN], invOlahan.list[simN]);
 		end
 		else if s='lihatResep' then //F14
 		begin
 			lihatResep(DftrResep);
-		end}
+		end
 		else if s='cariResep' then //F15
 		begin
 			cariResep(DftrResep);
 		end
-		{else if s='tambahResep' then //F16 //Ada parameter inputan user
+		else if s='tambahResep' then //F16 //Ada parameter inputan user
 		begin
-			tambahResep(DftrMentah, DftrOlahan, DftrResep);
-		end}
+			TambahResep(DftrMentah, DftrOlahan, DftrResep);
+		end
 		else if s='upgradeInventori' then //F17
 		begin
 			writeln('Inventori simulasi berapa yang ingin di-upgrade?');
@@ -79,18 +96,19 @@ implementation
 			writeln('Command salah');
 		end;
 	end;
-{
+
 	procedure Call1(var simN	: integer;
 					var nMakan	: integer;
 					var nIstirahat : integer;
 					var eoSim	: boolean;
 					var eoDay	: boolean;
+					var bTidur	: boolean;
 					var DftrSim : listSimulasi;
 					var DftrResep	: tabResep;
 					var DftrMentah	: tabMentah;
-					var DftrOlahan	: tabOlahan
-					var invMentah	: listInventoriM
-					var invOlahan	: listInventoriO
+					var DftrOlahan	: tabOlahan;
+					var invMentah	: listInventoriM;
+					var invOlahan	: listInventoriO;
 					var TglHariIni	: tanggal);
 	var
 		E0, uang0: integer;
@@ -107,8 +125,8 @@ implementation
 		end
 		else if s='beliBahan' then //F5
 		begin
-			E0:=DftrSim.list[simN].energi
-			uang0:=DftrSim.list[simN].uang
+			E0:=DftrSim.list[simN].energi;
+			uang0:=DftrSim.list[simN].uang;
 			
 			beliBahan(DftrMentah, invMentah.list[simN], invOlahan.list[simN], DftrSim.list[simN].uang, DftrSim.list[simN].energi, DftrSim.list[simN].kapasitas, TglHariIni);
 			
@@ -121,9 +139,9 @@ implementation
 		end
 		else if s='olahBahan' then //F6
 		begin
-			E0:=DftrSim.list[simN].energi
+			E0:=DftrSim.list[simN].energi;
 		
-			olahBahan(DftrOlahan, invMentah.list[simN], invOlahan.list[simN], DftrSim.list[simN].energi, DftrSim.list[simN].kapasitas, TglHariIni);
+			olahBahan(DftrOlahan, invMentah.list[simN], invOlahan.list[simN], DftrSim.list[simN].energi, TglHariIni);
 			
 			if E0>DftrSim.list[simN].energi then
 				bTidur:= True;
@@ -131,8 +149,8 @@ implementation
 		end
 		else if s='jualOlahan' then //F7 //ASSCLEAR
 		begin
-			E0:=DftrSim.list[simN].energi
-			uang0:=DftrSim.list[simN].uang
+			E0:=DftrSim.list[simN].energi;
+			uang0:=DftrSim.list[simN].uang;
 		
 			jualOlahan(invOlahan, DftrSim.list[simN].energi, DftrSim.list[simN].uang, simN);
 
@@ -145,8 +163,8 @@ implementation
 		end
 		else if s='jualResep' then //F8 //ASSCLEAR
 		begin
-			E0:=DftrSim.list[simN].energi
-			uang0:=DftrSim.list[simN].uang
+			E0:=DftrSim.list[simN].energi;
+			uang0:=DftrSim.list[simN].uang;
 		
 			jualResep (DftrResep, invMentah.list[simN],invOlahan.list[simN], DftrSim.list[simN].uang, DftrSim.list[simN].energi);
 			if E0>DftrSim.list[simN].energi then
@@ -158,7 +176,7 @@ implementation
 		end
 		else if s='makan' then //F9
 		begin
-			E0 := daftarsimulasi.list[N].energi;
+			E0 := DftrSim.list[simN].energi;
 			
 			makan(DftrSim, simN, nMakan);
 			
@@ -168,15 +186,15 @@ implementation
 		end
 		else if s='istirahat' then //F10
 		begin
-			E0 := daftarsimulasi.list[N].energi;
+			E0 := DftrSim.list[simN].energi;
 			
-			istirahat(nIstirahat, energi);
+			istirahat(DftrSim, simN, nIstirahat);
 			
 			if E0<DftrSim.list[simN].energi then
 				bTidur:= True;
 				//boleh tidur
 		end
-		else if s='tidur' then //F11 //.--- //BUG DELETE
+		{else if s='tidur' then //F11 //.--- //BUG DELETE
 		begin
 			//cekdulu bTidur
 			if bTidur=true then //boleh tidur
@@ -187,7 +205,7 @@ implementation
 			begin
 				writeln('Anda belum dapat tidur, anda harus melakukan kegiatan lain');
 			end;
-		end
+		end}
 		else if s='lihatStatistik' then //F12
 		begin
 			lihatStatistik(simN, DftrSim);
@@ -198,7 +216,7 @@ implementation
 			writeln('Inventori simulasi berapa yang ingin dilihat?');
 			readln(simN);
 			writeln('Membaca Inventori simulasi ', simN);
-			lihatInventori(simN, DftrSim);
+			lihatInventori(invMentah.list[simN], invOlahan.list[simN]);
 		end
 		else if s='lihatResep' then //F14
 		begin
@@ -210,7 +228,7 @@ implementation
 		end
 		else if s='tambahResep' then //F16
 		begin
-			tambahResep(DftrMentah, DftrOlahan; DftrResep);
+			TambahResep(DftrMentah, DftrOlahan, DftrResep);
 		end
 		else if s='upgradeInventori' then //F17
 		begin
@@ -223,5 +241,5 @@ implementation
 		begin
 			writeln('command salah');
 		end;
-	end;}
+	end;
 end.

@@ -10,9 +10,9 @@ interface
 
   procedure KurangiEnergi(var Energi : integer);  
 
-  procedure TambahPendapatanOlahan(var Pendapatan : integer; JumlahJualO : integer; BahanOlahan : ListInventoriO; Nsim : integer; i : integer); 
+  procedure TambahPendapatanOlahan(var Pendapatan : longint; JumlahJualO : integer; BahanOlahan : ListInventoriO; Nsim : integer; i : integer); 
   
-  Procedure JualOlahan(var BahanOlahan : ListInventoriO; var Energi : integer; var Pendapatan : integer; Nsim : integer);
+  Procedure JualOlahan(var BahanOlahan : ListInventoriO; var Energi : integer; var Pendapatan : longint; Nsim : integer);
   
 implementation 
 
@@ -55,7 +55,7 @@ implementation
   
   end; 
 
-  Procedure TambahPendapatanOlahan(var Pendapatan : integer; JumlahJualO : integer; BahanOlahan : ListInventoriO; Nsim : integer; i : integer);
+  Procedure TambahPendapatanOlahan(var Pendapatan : longint; JumlahJualO : integer; BahanOlahan : ListInventoriO; Nsim : integer; i : integer);
   {I.S. Jumlah pendapatan terdefinisi}
   {F.S. pendapatan bertambah}
   {prosedur untuk menambahkan pendapatan setelah menjual sesuatu}
@@ -67,7 +67,7 @@ implementation
   end;
   
   
-  Procedure JualOlahan(var BahanOlahan : ListInventoriO; var Energi : integer; var Pendapatan : integer; Nsim : integer);
+  Procedure JualOlahan(var BahanOlahan : ListInventoriO; var Energi : integer; var Pendapatan : longint; Nsim : integer);
   {I.S. bahan olahan yang ingin dijual terdefinisi}
   {F.S. bahan olahan terjual atau gagal karena beberapa faktor}
   {keseluruhan prosedur untuk menjual suatu bahan olahan pada inventori}

@@ -7,7 +7,7 @@ interface
   function cariIndeksResep (resep : string; daftarResep : tabResep): integer;
   function isBahanMentahValid (bahan : string; n : integer; daftarBahan : TabInventoriM): boolean;
   function isBahanOlahanValid (bahan : string; n : integer; daftarBahan : TabInventoriO): boolean;  
-  procedure jualResep (daftarResep : tabresep; daftarBahanM : TabInventoriM; daftarBahanO : TabInventoriO; var pendapatan : integer; var energi : integer);
+  procedure jualResep (daftarResep : tabresep; daftarBahanM : TabInventoriM; daftarBahanO : TabInventoriO; var pendapatan : longint; var energi : integer);
 
 implementation 
 
@@ -133,7 +133,7 @@ function isBahanOlahanValid (bahan : string; n : integer; daftarBahan : TabInven
 		end;
 	end;
 
-procedure jualResep (daftarResep : tabresep; daftarBahanM : TabInventoriM; daftarBahanO : TabInventoriO; var pendapatan : integer; var energi : integer);
+procedure jualResep (daftarResep : tabresep; daftarBahanM : TabInventoriM; daftarBahanO : TabInventoriO; var pendapatan : longint; var energi : integer);
 {I.S. Nama resep, daftar resep, daftar bahan mentah, daftar bahan olahan, dan pendapatan saat ini terdefinisi. Energi saat ini terdefinisi dan tervalidasi
  F.S. Jika resep yang akan dijual valid, maka bahan mentah dan bahan olahan di inventori berkurang, pendapatan bertambah, dan energi berurang}
 	var {KAMUS LOKAL jualResep}

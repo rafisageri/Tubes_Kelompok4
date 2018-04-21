@@ -18,7 +18,7 @@ interface
   
   Procedure InputResepBaru(NamaResep : string; MentahResep : Mresep; OlahanResep : Oresep; HargaResep : integer; var ResepJadi : tabresep);
   
-  Procedure TambahResep(BahanMentah : TabMentah; BahanOlahan : TabOlahan; var ResepJadi : tabresep; var Energi : integer);
+  Procedure TambahResep(BahanMentah : TabMentah; BahanOlahan : TabOlahan; var ResepJadi : tabresep);
   
 implementation
 
@@ -236,7 +236,7 @@ implementation
   
   end; 
   
-  Procedure TambahResep(BahanMentah : TabMentah; BahanOlahan : TabOlahan; var ResepJadi : tabresep; var Energi : integer);
+  Procedure TambahResep(BahanMentah : TabMentah; BahanOlahan : TabOlahan; var ResepJadi : tabresep);
   {I.S. menerima masukan nama, pembentuk, dan harga resep dari pengguna}
   {F.S. nama, pembentuk, harga resep ke daftar resep atau pembuatan resep gagal}
   {fungsi keseluruhan untuk membuat resep baru}
