@@ -4,35 +4,37 @@ interface
  
   uses TypeUniverse;
   
-  procedure CariOlahan(JualO : String; BahanOlahan : ListInventoriO; var FoundOlahan : Boolean; Nsim : integer; var i : integer); //JualO dan FoundOlahan var pada program utama. Nsim menunjukan nomor simulasi 
+  procedure CariOlahan(JualO : String; BahanOlahan : ListInventoriO; var FoundOlahan : Boolean; Nsim : integer; var i : integer); 
   
-  procedure KurangiOlahan(BahanOlahan : ListInventoriO; Nsim : integer; i : integer); //JumlahJualO, Olahan, dan Foundolahan var pada program utama 
+  procedure KurangiOlahan(BahanOlahan : ListInventoriO; Nsim : integer; i : integer); 
 
-  procedure KurangiEnergi(var Energi : integer); //Energi dan Foundolahan merupakan var pada program utama 
+  procedure KurangiEnergi(var Energi : integer); 
 
-  procedure TambahPendapatanOlahan(var Pendapatan : integer; JumlahJualO : integer; BahanOlahan : ListInventoriO; Nsim : integer; i : integer); //Pendapatan merupakan var pada program utama 
+  procedure TambahPendapatanOlahan(var Pendapatan : integer; JumlahJualO : integer; BahanOlahan : ListInventoriO; Nsim : integer; i : integer); 
   
   Procedure JualOlahan(var BahanOlahan : ListInventoriO; var Energi : integer; var Pendapatan : integer; Nsim : integer);
   
 implementation 
 
   procedure CariOlahan(JualO : String;  BahanOlahan : ListInventoriO; var FoundOlahan : Boolean; Nsim : integer; var i : integer); 
-  //Prosedur untuk mencari bahan olahan pada inventori, apakah bahan tersebut ada atau tidak pada inventori
+  {I.S. bahan olahan yang ingin dijual terdefinisi}
+  {F.S. bahan ditemukan atau tidak pada inventori bahan olahan}
+  {prosedur untuk mencari apakah suatu bahan olahan ada pada inventori sehingga bisa dijual}
 
   Begin //algoritma
   
     FoundOlahan := False;
     
     repeat 
-       if (BahanOlahan.list[Nsim].Tab[i].Nama = JualO) then begin //n adalah nomor simulasi 
+       if (BahanOlahan.list[Nsim].Tab[i].Nama = JualO) then begin //nsim adalah nomor simulasi 
 	     foundOlahan := True 
-	   end else 
+	   end else //BahanOlahan.list[nsim].tab[i].nama <> JualO
 	     i := i + 1;
-     until (foundOlahan) or (i > BahanOlahan.list[Nsim].neff) //looping akan berhenti juga bahan olahan masukan ada pada inventori atau saat tidak ditemukan sampai array ke neff
+     until (foundOlahan) or (i > BahanOlahan.list[Nsim].neff) //looping akan berhenti jika bahan olahan masukan ada pada inventori atau saat tidak ditemukan sampai array ke neff
    end;
    
   Procedure KurangiOlahan(BahanOlahan : ListInventoriO; Nsim : integer; i : integer);
-  //Prosedur untuk mengurangi jumlah bahan olahan pada inventori 
+  {I.S. 
   
   
   Begin //Algoritma
