@@ -309,7 +309,7 @@ procedure LoadResep (var bahanResep : tabResep; daftarMentah : tabmentah; daftar
 				q := CekBahanOlahan (tempS, daftarOlahan); 
 				if ((p=-1) and (q=-1)) then
 				begin
-					writeln ('>File resep baris ke ', j, ' memiliki bahan penyusun yang tidak terdefinisi');
+					writeln ('File resep baris ke ', j, ' memiliki bahan penyusun yang tidak terdefinisi');
 				end else if (p=-1) then
 				begin
 					nolahan := nolahan + 1;
@@ -320,7 +320,7 @@ procedure LoadResep (var bahanResep : tabResep; daftarMentah : tabmentah; daftar
 					bahanResep.tab[j].partmentah[nmentah].nama := tempS;
 				end else 
 				begin
-					writeln ('>File resep baris ke ', j, ' memiliki bahan penyusun yang tidak terdefinisi');
+					writeln ('File resep baris ke ', j, ' memiliki bahan penyusun yang tidak terdefinisi');
 				end;
 				temp := copy (temp,guardMark+2, lTemp); {Jika guardMark+2 lebih dari ltemp, maka copy () akan mengembalikan string kosong}
 				lTemp := length(temp);
