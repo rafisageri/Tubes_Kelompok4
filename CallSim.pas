@@ -135,7 +135,7 @@ implementation
 				//boleh tidur
 				
 			//pengeluaran nambah
-			DftrSim.list[simN].pengeluaran := DftrSim.list[simN].pengeluaran + (E0 - DftrSim.list[simN].uang);
+			DftrSim.list[simN].pengeluaran := DftrSim.list[simN].pengeluaran + (uang0 - DftrSim.list[simN].uang);
 		end
 		else if s='olahBahan' then //F6
 		begin
@@ -159,7 +159,7 @@ implementation
 				//boleh tidur
 
 			//pemasukan nambah
-			DftrSim.list[simN].pemasukan := DftrSim.list[simN].pemasukan + (DftrSim.list[simN].uang - E0);
+			DftrSim.list[simN].pemasukan := DftrSim.list[simN].pemasukan + (DftrSim.list[simN].uang - uang0);
 		end
 		else if s='jualResep' then //F8 //ASSCLEAR
 		begin
@@ -172,7 +172,7 @@ implementation
 				//boleh tidur
 
 			//pemasukan nambah
-			DftrSim.list[simN].pemasukan := DftrSim.list[simN].pemasukan + (DftrSim.list[simN].uang -E0);
+			DftrSim.list[simN].pemasukan := DftrSim.list[simN].pemasukan + (DftrSim.list[simN].uang -uang0);
 		end
 		else if s='makan' then //F9
 		begin
