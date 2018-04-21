@@ -78,19 +78,15 @@ procedure LoadBahanOlahan (var bahanOlahan : tabolahan); {Membaca file eksternal
 			
 			{Membaca nama bahan olahan yang bertipe string}
 			readln(inf, temp);
-			write('> ini temp awal ', temp);
 			lTemp := length(temp);
 			guardMark := pos ('|', temp);
 			bahanOlahan.tab[j].nama := copy(temp, 1, guardMark-2);
 					
 			{Membaca harga jual bahan olahan yang bertipe integer}
 			temp := copy (temp,guardMark+2, lTemp);
-			writeln('> ini temp pas baca harga jual ', temp);
 			lTemp := length(temp);
 			guardMark := pos ('|', temp);
 			bahanOlahan.tab[j].harga := StrToInt( copy(temp, 1, guardMark-2) );
-			
-			writeln ('> ini tempHargaJual ', bahanOlahan.tab[j].harga);
 		
 			{Membaca jumlah komposisi bahan olahan dengan asumsi nilai pada file eksternal bisa salah.
 			Sehingga jumlah komposisi bahan olahan ditentukan dengan menghitung nama-nama bahan mentah penyusun yang ada pada file}
@@ -99,8 +95,7 @@ procedure LoadBahanOlahan (var bahanOlahan : tabolahan); {Membaca file eksternal
 			lTemp := length(temp);
 			
 			temp := copy (temp,guardMark+2, lTemp);			//format temp saat ini nama | nama | ... | nama
-			writeln('> temp saat ini: ', temp);				//akan dijadikan nama | nama | ... | nama |
-			temp:= temp + ' |';								//format temp saat ini nama | nama | ... | nama |
+			temp:= temp + ' |';					//format temp saat ini nama | nama | ... | nama |
 		
 			//asumsi bahanOlahan.tab[j].N inkonklusif
 			lTemp := length(temp);
@@ -111,7 +106,6 @@ procedure LoadBahanOlahan (var bahanOlahan : tabolahan); {Membaca file eksternal
 				i:=i+1;
 				guardMark := pos ('|', temp);
 				bahanOlahan.tab[j].komposisi[i].nama := copy(temp, 1, guardMark-2);
-				writeln('nama terekam :', bahanOlahan.tab[j].komposisi[i].nama);
 				temp := copy (temp,guardMark+2, lTemp); {Jika guardMark+2 lebih dari ltemp, maka copy () akan mengembalikan string kosong}
 				lTemp := length(temp);
 			end;
@@ -284,19 +278,15 @@ procedure LoadResep (var bahanResep : tabResep; daftarMentah : tabmentah; daftar
 			
 			{Membaca nama resep yang bertipe string}
 			readln(inf, temp);
-			write('> ini temp awal ', temp);
 			lTemp := length(temp);
 			guardMark := pos ('|', temp);
 			bahanResep.tab[j].nama := copy(temp, 1, guardMark-2);
 					
 			{Membaca harga jual resep yang bertipe integer}
 			temp := copy (temp,guardMark+2, lTemp);
-			writeln('> ini temp pas baca harga jual ', temp);
 			lTemp := length(temp);
 			guardMark := pos ('|', temp);
 			bahanResep.tab[j].harga := StrToInt( copy(temp, 1, guardMark-2) );
-			
-			writeln ('> ini tempHargaJual ', bahanResep.tab[j].harga);
 			
 			{Membaca jumlah bahan-bahan penyusun resep dengan asumsi nilai pada file eksternal bisa salah.
 			Sehingga jumlah bahan-bahan penyusun resep ditentukan dengan menghitung nama-nama bahan penyusun resep yang ada pada file}
@@ -305,8 +295,7 @@ procedure LoadResep (var bahanResep : tabResep; daftarMentah : tabmentah; daftar
 			lTemp := length(temp);
 			
 			temp := copy (temp,guardMark+2, lTemp);			//format temp saat ini nama | nama | ... | nama
-			writeln('> temp saat ini: ', temp);				//akan dijadikan nama | nama | ... | nama |
-			temp:= temp + ' |';								//format temp saat ini nama | nama | ... | nama |
+			temp:= temp + ' |';					//format temp saat ini nama | nama | ... | nama |
 		
 			//asumsi bahanResep.tab[j].N inkonklusif
 			lTemp := length(temp);
@@ -316,12 +305,11 @@ procedure LoadResep (var bahanResep : tabResep; daftarMentah : tabmentah; daftar
 			begin
 				guardMark := pos ('|', temp);
 				tempS := copy(temp, 1, guardMark-2);
-				writeln('nama terekam :', tempS);
 				p := CekBahanMentah (tempS, daftarMentah);
 				q := CekBahanOlahan (tempS, daftarOlahan); 
 				if ((p=-1) and (q=-1)) then
 				begin
-					writeln ('File resep baris ke ', j, ' memiliki bahan penyusun yang tidak terdefinisi');
+					writeln ('>File resep baris ke ', j, ' memiliki bahan penyusun yang tidak terdefinisi');
 				end else if (p=-1) then
 				begin
 					nolahan := nolahan + 1;
@@ -332,7 +320,7 @@ procedure LoadResep (var bahanResep : tabResep; daftarMentah : tabmentah; daftar
 					bahanResep.tab[j].partmentah[nmentah].nama := tempS;
 				end else 
 				begin
-					writeln ('File resep baris ke ', j, ' memiliki bahan penyusun yang tidak terdefinisi');
+					writeln ('>File resep baris ke ', j, ' memiliki bahan penyusun yang tidak terdefinisi');
 				end;
 				temp := copy (temp,guardMark+2, lTemp); {Jika guardMark+2 lebih dari ltemp, maka copy () akan mengembalikan string kosong}
 				lTemp := length(temp);
