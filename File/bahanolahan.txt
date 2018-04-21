@@ -1,0 +1,4 @@
+Nasi Putih | 1200 | 2 | Beras | Air
+Nasi Merah | 2100 | 3 | Beras | Pewarna | Gula
+Air | 0 | 2 | H20 | Mineral-mineral yang berguna dan tidak berguna
+Ketiadaan | 2000 | 1 | Nihil

@@ -1,0 +1,7 @@
+Beras | 2500 | 2
+Air | 1000 | 3
+Pewarna | 5000 | 4
+Gula | 2600 | 5
+H20 | 4500 | 6
+Nihil | 3000 | 7
+Mineral-mineral yang berguna dan tidak berguna | 3000 | 99
