@@ -6,8 +6,8 @@ interface
 	function cekBahanOlahan (bahan : string; daftarBahan : tabolahan): integer;
 	procedure LoadBahanMentah (var bahanMentah : tabmentah); {Membaca file eksternal yang bernama 'bahanmentah.txt' terus dimasukkin ke tipe bentukan mentah}
 	procedure LoadBahanOlahan (var bahanOlahan : tabolahan); {Membaca file eksternal yang bernama 'bahanolahan.txt' terus dimasukkin ke tipe bentukan olahan}
-	procedure LoadInventoriBahanMentah (tabmentah : tabInventoriM); {Membaca file eksternal yang bernama 'InventoriBahanMentah.txt' terus dimasukkin ke tipe bentukan mentah}
-	procedure LoadInventoriBahanOlahan (tabolahan : tabInventoriO); {Membaca file eksternal yang bernama 'Inventoribahanolahan.txt' terus dimasukkin ke tipe bentukan olahan}
+	procedure LoadInventoriMentah (nfile: integer; nama:string; var listMentah:listInventoriM);{Membaca file eksternal yang bernama 'nama' terus dimasukkin ke tipe bentukan mentah. Format 'nama': 'inventoribahanmentah[nfile].txt'}
+	procedure LoadInventoriOlahan (nfile: integer; nama:string; var listOlahan:listInventoriO);{Membaca file eksternal yang bernama 'nama' terus dimasukkin ke tipe bentukan olahan. Format 'nama': 'inventoribahanolahan[nfile].txt'}
 	procedure LoadResep (var bahanResep : tabResep; daftarMentah : tabmentah; daftarOlahan : tabolahan); {Membaca file eksternal yang bernama 'resep.txt' terus dimasukkin ke tipe bentukan resep}
 	procedure LoadFileSimulasi (nfile: integer; nama:string; var arr: listSimulasi);
 	
@@ -56,6 +56,7 @@ procedure LoadBahanMentah (var bahanMentah : tabmentah); {Membaca file eksternal
 			j := j + 1;
 		end;
 		close (inf);
+		writeln ('> File bahan mentah berhasil di-load');
 	end;
 
 
@@ -114,9 +115,10 @@ procedure LoadBahanOlahan (var bahanOlahan : tabolahan); {Membaca file eksternal
 		end;
 		bahanOlahan.neff := j;
 		close (inf);
+		writeln ('> File bahan olahan berhasil di-load');
 	end;
 
-procedure LoadInventoriBahanMentah (tabmentah : tabInventoriM); {Membaca file eksternal yang bernama 'InventoriBahanMentah.txt' terus dimasukkin ke tipe bentukan mentah}
+procedure LoadInventoriMentah (nfile: integer; nama:string; var listMentah:listInventoriM);{Membaca file eksternal yang bernama 'nama' terus dimasukkin ke tipe bentukan mentah. Format 'nama': 'inventoribahanmentah[nfile].txt'}
 
 	var {KAMUS LOKAL InventoriBahanMentah}
 		guardMark 	: integer; {Menandakan posisi karakter guard dalam string}
@@ -127,7 +129,7 @@ procedure LoadInventoriBahanMentah (tabmentah : tabInventoriM); {Membaca file ek
 	
 	
 	begin {ALGORITMA UTAMA InventoriBahanMentah}
-		assign (inf, 'inventoribahanmentah.txt');
+		assign (inf, nama);
 		reset (inf);
 		j := 0;
 		while (not(EOF(inf))) do
@@ -136,33 +138,34 @@ procedure LoadInventoriBahanMentah (tabmentah : tabInventoriM); {Membaca file ek
 			readln (inf, temp);
 			{Membaca nama inventori bahan mentah yang bertipe string}
 			guardMark := pos ('|', temp);
-			tabmentah.tab[j].nama := copy (temp, 1, guardMark-2);
+			listMentah.list[nfile].tab[j].nama := copy (temp, 1, guardMark-2);
 		
 			{Membaca Hari beli yang bertipe integer}
 			temp := copy (temp,guardMark+2, length(temp));
 			slashMark := pos ('/', temp);
-			tabmentah.tab[j].tglbeli.hari := StrToInt ( copy (temp, 1, slashMark-1) );
+			listMentah.list[nfile].tab[j].tglbeli.hari := StrToInt ( copy (temp, 1, slashMark-1) );
 		
 			{Membaca Bulan beli yang bertipe integer}
 			temp := copy (temp,slashmark+1, length(temp));
 			slashMark := pos ('/', temp);
-			tabmentah.tab[j].tglbeli.bulan := StrToInt (copy (temp, 1, slashMark-1));
+			listMentah.list[nfile].tab[j].tglbeli.bulan := StrToInt (copy (temp, 1, slashMark-1));
 		
 			{Membaca Tahun beli yang bertipe integer}
 			temp := copy (temp,slashmark + 1, length(temp));
 			guardMark := pos ('|', temp);
-			tabmentah.tab[j].tglbeli.tahun := StrToInt (copy (temp, 1, guardMark-2));
+			listMentah.list[nfile].tab[j].tglbeli.tahun := StrToInt (copy (temp, 1, guardMark-2));
 			
 			{Membaca Jumlah bahan mentah yang bertipe integer}
 			temp := copy (temp,guardMark+2, length(temp));
-			tabmentah.tab[j].jumlah := StrToInt (copy (temp, 1, length(temp)));
+			listMentah.list[nfile].tab[j].jumlah := StrToInt (copy (temp, 1, length(temp)));
 		end;
 		close (inf);
+		writeln ('> File inventori bahan mentah berhasil di-load');
 	end;
 
-procedure LoadInventoriBahanOlahan (tabolahan : tabInventoriO); {Membaca file eksternal yang bernama 'Inventoribahanolahan.txt' terus dimasukkin ke tipe bentukan olahan}
+procedure LoadInventoriOlahan (nfile: integer; nama:string; var listOlahan:listInventoriO);{Membaca file eksternal yang bernama 'nama' terus dimasukkin ke tipe bentukan olahan. Format 'nama': 'inventoribahanolahan[nfile].txt'}
 
-	var {KAMUS LOKAL LoadInventoriBahanOlahan}
+	var {KAMUS LOKAL LoadInventoriOlahan}
 		guardMark 	: integer; {Menandakan posisi karakter guard dalam string}
 		slashMark 	: integer; {Menandakan posisi karakter slash dalam string}
 		j			: integer; {Menandakan jumlah bahan mentah dalam file eksternal}
@@ -170,8 +173,8 @@ procedure LoadInventoriBahanOlahan (tabolahan : tabInventoriO); {Membaca file ek
 		inf			: textfile;
 	
 	
-	begin {ALGORITMA UTAMA LoadInventoriBahanOlahan}
-		assign (inf, 'inventoribahanolahan.txt');
+	begin {ALGORITMA UTAMA LoadInventoriOlahan}
+		assign (inf, nama);
 		reset (inf);
 		j := 0;
 		while (not(EOF(inf))) do
@@ -180,28 +183,29 @@ procedure LoadInventoriBahanOlahan (tabolahan : tabInventoriO); {Membaca file ek
 			readln (inf, temp);
 			{Membaca nama inventori bahan mentah yang bertipe string}
 			guardMark := pos ('|', temp);
-			tabolahan.tab[j].nama := copy (temp, 1, guardMark-2);
+			listOlahan.list[nfile].tab[j].nama := copy (temp, 1, guardMark-2);
 		
 			{Membaca Hari beli yang bertipe integer}
 			temp := copy (temp,guardMark+2, length(temp));
 			slashMark := pos ('/', temp);
-			tabolahan.tab[j].tglbuat.hari := StrToInt ( copy (temp, 1, slashMark-1) );
+			listOlahan.list[nfile].tab[j].tglbuat.hari := StrToInt ( copy (temp, 1, slashMark-1) );
 		
 			{Membaca Bulan beli yang bertipe integer}
 			temp := copy (temp,slashmark+1, length(temp));
 			slashMark := pos ('/', temp);
-			tabolahan.tab[j].tglbuat.bulan := StrToInt (copy (temp, 1, slashMark-1));
+			listOlahan.list[nfile].tab[j].tglbuat.bulan := StrToInt (copy (temp, 1, slashMark-1));
 			
 			{Membaca Tahun beli yang bertipe integer}
 			temp := copy (temp,slashmark + 1, length(temp));
 			guardMark := pos ('|', temp);
-			tabolahan.tab[j].tglbuat.tahun := StrToInt (copy (temp, 1, guardMark-2));
+			listOlahan.list[nfile].tab[j].tglbuat.tahun := StrToInt (copy (temp, 1, guardMark-2));
 		
 			{Membaca Jumlah bahan mentah yang bertipe integer}
 			temp := copy (temp,guardMark+2, length(temp));
-			tabolahan.tab[j].jumlah := StrToInt (copy (temp, 1, length(temp)));
+			listOlahan.list[nfile].tab[j].jumlah := StrToInt (copy (temp, 1, length(temp)));
 		end;
 		close (inf);
+		writeln ('> File bahan olahan berhasil di-load');
 	end;
 	
 function cekBahanMentah (bahan : string; daftarBahan : tabmentah): integer;
@@ -331,6 +335,7 @@ procedure LoadResep (var bahanResep : tabResep; daftarMentah : tabmentah; daftar
 		end;
 		bahanResep.neff := j;
 		close (inf);
+		writeln ('> File resep berhasil di-load');
 	end;
 	
 procedure LoadFileSimulasi (nfile: integer; nama:string; var arr: listSimulasi);
@@ -446,5 +451,6 @@ procedure LoadFileSimulasi (nfile: integer; nama:string; var arr: listSimulasi);
 		end;
 	
 		close(inf);
+		writeln ('> File simulasi berhasil di-load');
 	end;
 end.

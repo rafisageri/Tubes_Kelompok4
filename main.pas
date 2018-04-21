@@ -33,29 +33,29 @@ begin
 	LoadFileSimulasi(10, 'simul10.txt', DftrSim);
 
 	//read Inventori Bahan Mentah
-	LoadInventoriBahanMentah(1, 'inventoribahanmentah1.txt', invMentah);
-	LoadInventoriBahanMentah(2, 'inventoribahanmentah2.txt', invMentah);
-	LoadInventoriBahanMentah(3, 'inventoribahanmentah3.txt', invMentah);
-	LoadInventoriBahanMentah(4, 'inventoribahanmentah4.txt', invMentah);
-	LoadInventoriBahanMentah(5, 'inventoribahanmentah5.txt', invMentah);
-	LoadInventoriBahanMentah(6, 'inventoribahanmentah6.txt', invMentah);
-	LoadInventoriBahanMentah(7, 'inventoribahanmentah7.txt', invMentah);
-	LoadInventoriBahanMentah(8, 'inventoribahanmentah8.txt', invMentah);
-	LoadInventoriBahanMentah(9, 'inventoribahanmentah9.txt', invMentah);
-	LoadInventoriBahanMentah(10, 'inventoribahanmentah10.txt', invMentah);
+	LoadInventoriMentah(1, 'inventoribahanmentah1.txt', invMentah);
+	LoadInventoriMentah(2, 'inventoribahanmentah2.txt', invMentah);
+	LoadInventoriMentah(3, 'inventoribahanmentah3.txt', invMentah);
+	LoadInventoriMentah(4, 'inventoribahanmentah4.txt', invMentah);
+	LoadInventoriMentah(5, 'inventoribahanmentah5.txt', invMentah);
+	LoadInventoriMentah(6, 'inventoribahanmentah6.txt', invMentah);
+	LoadInventoriMentah(7, 'inventoribahanmentah7.txt', invMentah);
+	LoadInventoriMentah(8, 'inventoribahanmentah8.txt', invMentah);
+	LoadInventoriMentah(9, 'inventoribahanmentah9.txt', invMentah);
+	LoadInventoriMentah(10, 'inventoribahanmentah10.txt', invMentah);
 
 	//read Inventori Bahan Olahan
-	LoadInventoriBahanOlahan(1, 'inventoribahanolahan1.txt', invOlahan);
-	LoadInventoriBahanOlahan(2, 'inventoribahanolahan2.txt', invOlahan);
-	LoadInventoriBahanOlahan(3, 'inventoribahanolahan3.txt', invOlahan);
-	LoadInventoriBahanOlahan(4, 'inventoribahanolahan4.txt', invOlahan);
-	LoadInventoriBahanOlahan(5, 'inventoribahanolahan5.txt', invOlahan);
-	LoadInventoriBahanOlahan(6, 'inventoribahanolahan6.txt', invOlahan);
-	LoadInventoriBahanOlahan(7, 'inventoribahanolahan7.txt', invOlahan);
-	LoadInventoriBahanOlahan(8, 'inventoribahanolahan8.txt', invOlahan);
-	LoadInventoriBahanOlahan(9, 'inventoribahanolahan9.txt', invOlahan);
-	LoadInventoriBahanOlahan(10, 'inventoribahanolahan10.txt', invOlahan);
-	}
+	LoadInventoriOlahan(1, 'inventoribahanolahan1.txt', invOlahan);
+	LoadInventoriOlahan(2, 'inventoribahanolahan2.txt', invOlahan);
+	LoadInventoriOlahan(3, 'inventoribahanolahan3.txt', invOlahan);
+	LoadInventoriOlahan(4, 'inventoribahanolahan4.txt', invOlahan);
+	LoadInventoriOlahan(5, 'inventoribahanolahan5.txt', invOlahan);
+	LoadInventoriOlahan(6, 'inventoribahanolahan6.txt', invOlahan);
+	LoadInventoriOlahan(7, 'inventoribahanolahan7.txt', invOlahan);
+	LoadInventoriOlahan(8, 'inventoribahanolahan8.txt', invOlahan);
+	LoadInventoriOlahan(9, 'inventoribahanolahan9.txt', invOlahan);
+	LoadInventoriOlahan(10, 'inventoribahanolahan10.txt', invOlahan);
+	
 	//read Daftar Bahan Mentah di Supermarket
 	LoadBahanMentah(DftrMentah);
 	
@@ -70,7 +70,7 @@ begin
 	
 
 		//Uses callSim, preSimulasi action here
-		Call0(simN, eoSim, eoProg, DftrSim, DftrResep, DftrMentah,DftrOlahan);
+		Call0(simN, eoSim, eoProg, DftrSim, DftrResep, DftrMentah, DftrOlahan, invMentah, invOlahan);
 		
 		//inisialisasi eoSim := false ada di Call0, startSimulasi
 		if not(eoSim) then		//hari sebenernya ada di array
@@ -112,7 +112,7 @@ begin
 				end	
 				else //energi <>0
 				begin
-					//Call1(simN, nMakan, nIstirahat, eoSim, eoDay, DftrSim, DftrResep, DftrMentah, DftrOlahan, invMentah, invOlahan,	TglHariIni	: tanggal); 
+					Call1(simN, nMakan, nIstirahat, eoSim, eoDay, bTidur, DftrSim, DftrResep, DftrMentah, DftrOlahan, invMentah, invOlahan,	TglHariIni); 
 					//uses callSim, main action
 				end;
 			until eoDay or eoSim;
@@ -169,7 +169,7 @@ begin
 		//p.s.: is this really necessary?
 		
 		//save Daftar Resep
-		SaveResep(DftrResep, DftrMentah, DftrOlahan);}
+		SaveResep(DftrResep);
 	until eoProg = True;
 	
   

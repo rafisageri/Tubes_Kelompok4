@@ -5,8 +5,8 @@ interface
 	procedure SaveFileSimulasi (nfile: integer; nama:string; arr: listSimulasi);
 	procedure SaveInventoriMentah (nfile : integer; nama : string; arr : listInventoriM);
 	procedure SaveInventoriOlahan (nfile : integer; nama : string; arr : listInventoriO);
-	procedure SaveResep (nfile : integer; nama : string; resep : tabResep);
-	procedure SaveBahanOlahan (nfile : integer; nama : string; olahan : tabolahan);
+	procedure SaveResep (resep : tabResep);
+	procedure SaveBahanOlahan (olahan : tabolahan);
 	
 implementation
 procedure SaveFileSimulasi (nfile: integer; nama:string; arr: listSimulasi);
@@ -82,15 +82,15 @@ procedure SaveInventoriOlahan (nfile : integer; nama : string; arr : listInvento
 		writeln ('>File inventori bahan olahan berhasil tersimpan');
 	end;
 	
-procedure SaveResep (nfile : integer; nama : string; resep : tabResep);
+procedure SaveResep (resep : tabResep);
 	{I.S. Tabel data resep saat ini terdefinisi
-	 F.S. File eksternal berisi data resep saat ini}
+	 F.S. File eksternal 'resep.txt' berisi data resep saat ini}
 	 var {KAMUS LOKAL SaveResep}
 		inf : textfile;
 		temp : string;
 		i,j : integer;
 	begin {ALGORITMA SaveResep}
-		assign (inf, nama);
+		assign (inf, 'daftarresep.txt');
 		rewrite (inf);
 		{format isi data: Nama Resep | Harga Jual | N | Bahan-1 | Bahan-2 | Bahan-3 | … | Bahan-N }
 		for i:= 1 to resep.neff do
@@ -114,15 +114,15 @@ procedure SaveResep (nfile : integer; nama : string; resep : tabResep);
 		writeln ('>File resep berhasil tersimpan');
 	end;
 	
-procedure SaveBahanOlahan (nfile : integer; nama : string; olahan : tabolahan);
+procedure SaveBahanOlahan (olahan : tabolahan);
 	{I.S. Tabel bahan olahan saat ini terdefinisi
-	 F.S. File eksternal berisi tabel bahan olahan saat ini}
+	 F.S. File eksternal 'daftarolahan.txt' berisi tabel bahan olahan saat ini}
 	var {KAMUS LOKAL SaveBahanOlahan}
 		inf : textfile;
 		temp : string;
 		i,j : integer;
 	begin {ALGORITMA SaveBahanOlahan}
-		assign (inf, nama);
+		assign (inf, 'daftarolahan.txt');
 		rewrite (inf);
 		{format isi data: Nama Bahan Olahan | Harga Jual | N | Bahan-1 | Bahan-2 | Bahan-3 | … | Bahan-N }
 		for i:=1 to olahan.neff do
