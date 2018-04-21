@@ -4,13 +4,13 @@ interface
  
   uses TypeUniverse;
   
-  procedure CariOlahan(JualO : String; BahanOlahan : ListInventoriO; var FoundOlahan : Boolean; Nsim : integer; var i : integer); //JualO dan FoundOlahan var pada program utama. Nsim menunjukan nomor simulasi 
+  procedure CariOlahan(JualO : String; BahanOlahan : ListInventoriO; var FoundOlahan : Boolean; Nsim : integer; var i : integer); 
   
-  procedure KurangiOlahan(BahanOlahan : ListInventoriO; Nsim : integer; i : integer); //JumlahJualO, Olahan, dan Foundolahan var pada program utama 
+  procedure KurangiOlahan(BahanOlahan : ListInventoriO; Nsim : integer; i : integer); 
 
-  procedure KurangiEnergi(var Energi : integer); //Energi dan Foundolahan merupakan var pada program utama 
+  procedure KurangiEnergi(var Energi : integer);  
 
-  procedure TambahPendapatanOlahan(var Pendapatan : integer; JumlahJualO : integer; BahanOlahan : ListInventoriO; Nsim : integer; i : integer); //Pendapatan merupakan var pada program utama 
+  procedure TambahPendapatanOlahan(var Pendapatan : integer; JumlahJualO : integer; BahanOlahan : ListInventoriO; Nsim : integer; i : integer); 
   
   Procedure JualOlahan(var BahanOlahan : ListInventoriO; var Energi : integer; var Pendapatan : integer; Nsim : integer);
   
