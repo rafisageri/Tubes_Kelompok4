@@ -362,12 +362,14 @@ procedure LoadFileSimulasi (nfile: integer; nama:string; var arr: listSimulasi);
 			
 		read(inf, temp);											//baca isi file ke variabel temp: string
 		l:= length(temp);
-		guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan			arr.list[nfile].nomor := StrToInt( copy(temp, 1, (guardmark-2)) ); 		//assign nomor
+		guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
+		arr.list[nfile].nomor := StrToInt( copy(temp, 1, (guardmark-2)) ); 		//assign nomor
 			
 
 		temp := copy (temp, guardmark+2, l); 						//truncate temp
 		l := l - guardmark - 1;										//panjang baru
-		guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan			tempTgl := copy(temp, 1, guardmark-2);
+		guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan	
+		tempTgl := copy(temp, 1, guardmark-2);
 		//format tempTgl hari/bulan/tahun
 			
 		////////////////////////////////////////////////////////////////////////////
