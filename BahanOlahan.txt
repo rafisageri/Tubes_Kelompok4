@@ -1,0 +1,12 @@
+Saus Marinara | 8 | 2 | Bawang Putih | Tomat 
+Saus Keju | 12 | 2 | Keju | Susu 
+Soda Gembira | 15 | 3 | Es | Soda | Susu  
+Milkshake | 12 | 2 | Es | Susu 
+Jus | 10 | 3 | Buah | Air | Es 
+Es Krim | 8 | 2 | Es | Krim 
+French Fries | 12 | 3 | Kentang | Tepung | Minyak 
+Mashed Potato | 15 | 4 | Kentang | Susu | Bawang Putih | Air 
+Garlic Bread | 20 | 4 | Roti | Mentega | Bawang Putih | Keju 
+Nasi | 5 | 2 | Beras | Air
+Es teh | 6 |  2 | Es | Teh
+Omlette | 14 | 3 | Telur | Bawang Bombay | Minyak 

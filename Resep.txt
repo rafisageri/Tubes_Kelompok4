@@ -1,0 +1,12 @@
+Beef Burger | 65 | 7 | Daging | Selada | Tomat | Bawang Bombay | Roti | Mayonaise | French Fries 
+Chicken Burger | 55 | 6 | Ayam | Selada | Mayonaise | Keju | French Fries | Roti  
+Egg n Cheese Burger | 35 | 3 | Roti | Omlette | Keju 
+Beef Spaghetti | 60 | 5 | Daging | Spaghetti | Air | Saus Marinara | Keju  
+Creamy Mushroom Fettuccine | 45 | 6 | Fettuccine | Air | Jamur | Krim | Keju | Susu 
+Mac n Cheese | 47 | 5 | Makaroni | Saus Keju | Krim | Keju | Tepung 
+Beef Teriyaki | 42 | 5 | Daging | Soyu | Bawang Bombay | Bawang Putih | Nasi 
+Fried Chicken | 40 | 4 | Nasi | Ayam | Tepung | Telur 
+Beef Steak | 70 | 5 | Daging | Mentega | Mashed Potato | Krim | Jamur 
+Salad | 38 | 60 | Tomat | Timun | Selada | Bawang Bombay | Mayonaise | Garlic Bread
+Pizza | 62 | 80 | Tepung | Air | Minyak | Saus Marinara | Keju | Daging | Bawang Bombay | Jamur 
+Fish n Chips | 50 | 6 | Ikan | Tepung | Telur | Minyak | Mayonaise | French Fries 

@@ -1,0 +1,36 @@
+Air | 1 | 100
+Minyak | 1 | 100
+Mentega | 2 | 50
+Tepung | 1 | 100
+Es | 1 | 50
+Beras | 3 |20
+Roti | 5 | 3
+Kentang | 5 | 5
+Bawang Putih | 2 | 5
+Bawang Merah | 2 | 5
+Bawang Bombay | 2 | 5
+Paprika | 2 | 5 
+Selada | 2 | 3
+Tomat | 2 | 3
+Timun | 2 | 3
+Saus | 2 | 50 
+Mayonaise | 2 | 50
+Keju | 5 | 7
+Jamur | 4 | 5
+Telur | 4 | 5
+Krim | 5 | 4
+Susu | 5 | 6
+Spaghetti | 10 | 8
+Makaroni | 10 | 8
+Fettuccine | 10 | 8 
+Ikan | 12 | 3 
+Daging | 20 | 3
+Ayam | 15 | 3
+Teh | 2 | 10
+Buah | 4 | 3
+Soda | 5 | 8
+Soyu | 2 | 6 
+Rempah | 3 | 6 
+ 
+
+
