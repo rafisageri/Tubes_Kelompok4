@@ -1,7 +1,7 @@
 unit F11;
 
 interface
-uses typeuniverse, uload, sysutils, penanggalan;
+uses typeuniverse, F1, sysutils, penanggalan;
 function cariKadaluarsa (bahan : string; daftarMentah : tabmentah): integer;
 function isKadaluarsaM (i : integer; daftarmentah : tabMentah; inventoriM : listInventoriM; TglHariIni : tanggal; nfile : integer): boolean;
 function isKadaluarsaO (i : integer; daftarolahan : tabOlahan; inventoriO : listInventoriO; TglHariIni : tanggal; nfile : integer): boolean;
@@ -135,7 +135,7 @@ procedure buangKadaluarsa (TglHariIni : tanggal; var InventoriM : listInventoriM
 					writeln (inf, temp);
 				end;
 				close (inf);
-				LoadInventoriBahanMentah (InventoriM.list[nfile]);
+				LoadInventoriMentah (simN,namaFile,InventoriM);
 			end;
 		end;
 		
@@ -163,7 +163,7 @@ procedure buangKadaluarsa (TglHariIni : tanggal; var InventoriM : listInventoriM
 					writeln (inf, temp);
 				end;
 				close (inf);
-				LoadInventoriBahanOlahan (InventoriO.list[nfile]);
+				LoadInventoriOlahan (simN,namaFile,InventoriO);
 			end;
 		end;
 	end;
