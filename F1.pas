@@ -27,9 +27,10 @@ procedure LoadBahanMentah (var bahanMentah : tabmentah); {Membaca file eksternal
 	begin {ALGORITMA UTAMA LoadBahanMentah}
 		assign (inf, 'bahanmentah.txt');
 		reset (inf);
-		j := 1;
+		j := 0; //mungkin kosong
 		while (not(EOF(inf))) do
 		begin		
+			j:=j+1;//isi bertambah 1
 			readln (inf, temp);
 			{Membaca nama bahan mentah yang bertipe string}
 			guardMark := pos ('|', temp);
@@ -52,11 +53,9 @@ procedure LoadBahanMentah (var bahanMentah : tabmentah); {Membaca file eksternal
 				tempKadaluarsa[i] := temp[i]
 			end;
 			bahanMentah.tab[j].Kadaluarsa := StrToInt (tempKadaluarsa);
-		
-			j := j + 1;
 		end;
+		bahanMentah.neff:=j;
 		close (inf);
-		writeln ('> File bahan mentah berhasil di-load');
 	end;
 
 
@@ -115,7 +114,6 @@ procedure LoadBahanOlahan (var bahanOlahan : tabolahan); {Membaca file eksternal
 		end;
 		bahanOlahan.neff := j;
 		close (inf);
-		writeln ('> File bahan olahan berhasil di-load');
 	end;
 
 procedure LoadInventoriMentah (nfile: integer; nama:string; var listMentah:listInventoriM);{Membaca file eksternal yang bernama 'nama' terus dimasukkin ke tipe bentukan mentah. Format 'nama': 'inventoribahanmentah[nfile].txt'}
@@ -123,7 +121,8 @@ procedure LoadInventoriMentah (nfile: integer; nama:string; var listMentah:listI
 	var {KAMUS LOKAL InventoriBahanMentah}
 		guardMark 	: integer; {Menandakan posisi karakter guard dalam string}
 		slashMark 	: integer; {Menandakan posisi karakter slash dalam string}
-		j			: integer; {Menandakan jumlah inventori bahan mentah dalam file eksternal} 
+		j			: integer; {Menandakan jumlah data inventori bahan mentah dalam file eksternal} 
+		sum			: integer; {Menandakan jumlah barang inventori bahan mentah dalam file eksternal} 
 		temp		: array [1..100] of char;  {Menyimpan data  dalam bentuk string sebelum di-convert ke integer}
 		inf 		: textfile;
 	
@@ -132,6 +131,7 @@ procedure LoadInventoriMentah (nfile: integer; nama:string; var listMentah:listI
 		assign (inf, nama);
 		reset (inf);
 		j := 0;
+		sum:= 0;
 		while (not(EOF(inf))) do
 		begin
 			j := j + 1;
@@ -158,9 +158,12 @@ procedure LoadInventoriMentah (nfile: integer; nama:string; var listMentah:listI
 			{Membaca Jumlah bahan mentah yang bertipe integer}
 			temp := copy (temp,guardMark+2, length(temp));
 			listMentah.list[nfile].tab[j].jumlah := StrToInt (copy (temp, 1, length(temp)));
+			sum:=sum+listMentah.list[nfile].tab[j].jumlah;
 		end;
+		listMentah.list[nfile].neff:=j;
+		listMentah.list[nfile].ntot:=sum;
+		
 		close (inf);
-		writeln ('> File inventori bahan mentah berhasil di-load');
 	end;
 
 procedure LoadInventoriOlahan (nfile: integer; nama:string; var listOlahan:listInventoriO);{Membaca file eksternal yang bernama 'nama' terus dimasukkin ke tipe bentukan olahan. Format 'nama': 'inventoribahanolahan[nfile].txt'}
@@ -168,7 +171,8 @@ procedure LoadInventoriOlahan (nfile: integer; nama:string; var listOlahan:listI
 	var {KAMUS LOKAL LoadInventoriOlahan}
 		guardMark 	: integer; {Menandakan posisi karakter guard dalam string}
 		slashMark 	: integer; {Menandakan posisi karakter slash dalam string}
-		j			: integer; {Menandakan jumlah bahan mentah dalam file eksternal}
+		j			: integer; {Menandakan jumlah data bahan olahan dalam file eksternal}
+		sum			: integer; {Menandakan jumlah barang bahan olahan dalam file eksternal}
 		temp		: array [1..100] of char;  {Menyimpan data  dalam bentuk string sebelum di-convert ke integer}
 		inf			: textfile;
 	
@@ -177,11 +181,12 @@ procedure LoadInventoriOlahan (nfile: integer; nama:string; var listOlahan:listI
 		assign (inf, nama);
 		reset (inf);
 		j := 0;
+		sum:=0;
 		while (not(EOF(inf))) do
 		begin
 			j := j + 1;
 			readln (inf, temp);
-			{Membaca nama inventori bahan mentah yang bertipe string}
+			{Membaca nama inventori bahan olahan yang bertipe string}
 			guardMark := pos ('|', temp);
 			listOlahan.list[nfile].tab[j].nama := copy (temp, 1, guardMark-2);
 		
@@ -200,12 +205,14 @@ procedure LoadInventoriOlahan (nfile: integer; nama:string; var listOlahan:listI
 			guardMark := pos ('|', temp);
 			listOlahan.list[nfile].tab[j].tglbuat.tahun := StrToInt (copy (temp, 1, guardMark-2));
 		
-			{Membaca Jumlah bahan mentah yang bertipe integer}
+			{Membaca Jumlah bahan olahan yang bertipe integer}
 			temp := copy (temp,guardMark+2, length(temp));
 			listOlahan.list[nfile].tab[j].jumlah := StrToInt (copy (temp, 1, length(temp)));
+			sum:=sum+listOlahan.list[nfile].tab[j].jumlah
 		end;
 		close (inf);
-		writeln ('> File bahan olahan berhasil di-load');
+		listOlahan.list[nfile].neff:=j;
+		listOlahan.list[nfile].ntot:=sum;
 	end;
 	
 function cekBahanMentah (bahan : string; daftarBahan : tabmentah): integer;
@@ -335,7 +342,6 @@ procedure LoadResep (var bahanResep : tabResep; daftarMentah : tabmentah; daftar
 		end;
 		bahanResep.neff := j;
 		close (inf);
-		writeln ('> File resep berhasil di-load');
 	end;
 	
 procedure LoadFileSimulasi (nfile: integer; nama:string; var arr: listSimulasi);
@@ -353,104 +359,97 @@ procedure LoadFileSimulasi (nfile: integer; nama:string; var arr: listSimulasi);
 		nomor | hari hidup | energi | kapasitas inv. maks | Total Bahan Mentah Dibeli |
 		Total Bahan Olahan Dibuat | Total Bahan Olahan Dijual | Total Resep Dijual |
 		Total Pemasukan | Total Pengeluaran | Total Pendapatan}
-		 
-		while not(eof(inf)) do
-		begin
 			
-			read(inf, temp);											//baca isi file ke variabel temp: string
-			l:= length(temp);
-			guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
-			arr.list[nfile].nomor := StrToInt( copy(temp, 1, (guardmark-2)) ); 		//assign nomor
+		read(inf, temp);											//baca isi file ke variabel temp: string
+		l:= length(temp);
+		guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan			arr.list[nfile].nomor := StrToInt( copy(temp, 1, (guardmark-2)) ); 		//assign nomor
 			
 
+		temp := copy (temp, guardmark+2, l); 						//truncate temp
+		l := l - guardmark - 1;										//panjang baru
+		guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan			tempTgl := copy(temp, 1, guardmark-2);
+		//format tempTgl hari/bulan/tahun
+			
+		////////////////////////////////////////////////////////////////////////////
+		lTgl := length(tempTgl);
+		slashmark := pos ('/', tempTgl);
+		arr.list[nfile].awalsim.hari := StrToInt(copy(tempTgl, 1, slashmark-1));
+		tempTgl := copy(tempTgl, slashmark+1, lTgl);
+			
+		lTgl := lTgl-slashmark;
+		slashmark := pos ('/', tempTgl);
+		arr.list[nfile].awalsim.bulan := StrToInt(copy(tempTgl, 1, slashmark-1));
+		arr.list[nfile].awalsim.tahun := StrToInt(copy(tempTgl, slashmark+1, lTgl));
+		////////////////////////////////////////////////////////////////////////////
+			
+		temp := copy (temp, guardmark+2, l); 						//truncate temp
+		l := l - guardmark - 1;										//panjang baru
+		guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
+		arr.list[nfile].totalhari := StrToInt( copy(temp, 1, (guardmark-2)) ); //assign totalhari
+			
+		if arr.list[nfile].totalhari = 0 then
+		begin
+			DeCodeDate (Date,tt,bb,hh);
+				
+			arr.list[nfile].awalsim.hari := hh;		//assign awalsim
+			arr.list[nfile].awalsim.bulan := bb;
+			arr.list[nfile].awalsim.tahun := tt;
+				
+			arr.list[nfile].energi := 10;
+			arr.list[nfile].kapasitas := 25;
+			arr.list[nfile].totalmentahbeli := 0;
+			arr.list[nfile].totalbahanbuat := 0;
+			arr.list[nfile].totalbahanjual := 0;
+			arr.list[nfile].totalresepjual := 0;
+			arr.list[nfile].pemasukan := 5000000;//modal
+			arr.list[nfile].pengeluaran := 0;
+			arr.list[nfile].uang := 5000000;//modal
+		end
+		else //arr.list[nfile].totalhari <> 0
+		begin
 			temp := copy (temp, guardmark+2, l); 						//truncate temp
 			l := l - guardmark - 1;										//panjang baru
 			guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
-			tempTgl := copy(temp, 1, guardmark-2);
-			//format tempTgl hari/bulan/tahun
-			
-			////////////////////////////////////////////////////////////////////////////
-			lTgl := length(tempTgl);
-			slashmark := pos ('/', tempTgl);
-			arr.list[nfile].awalsim.hari := StrToInt(copy(tempTgl, 1, slashmark-1));
-			tempTgl := copy(tempTgl, slashmark+1, lTgl);
-			
-			lTgl := lTgl-slashmark;
-			slashmark := pos ('/', tempTgl);
-			arr.list[nfile].awalsim.bulan := StrToInt(copy(tempTgl, 1, slashmark-1));
-			arr.list[nfile].awalsim.tahun := StrToInt(copy(tempTgl, slashmark+1, lTgl));
-			////////////////////////////////////////////////////////////////////////////
+			arr.list[nfile].energi := StrToInt( copy(temp, 1, (guardmark-2)) );		//assign energi
 			
 			temp := copy (temp, guardmark+2, l); 						//truncate temp
 			l := l - guardmark - 1;										//panjang baru
 			guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
-			arr.list[nfile].totalhari := StrToInt( copy(temp, 1, (guardmark-2)) ); //assign totalhari
-			
-			if arr.list[nfile].totalhari = 0 then
-			begin
-				DeCodeDate (Date,tt,bb,hh);
+			arr.list[nfile].kapasitas := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign kapasitas
 				
-				arr.list[nfile].awalsim.hari := hh;		//assign awalsim
-				arr.list[nfile].awalsim.bulan := bb;
-				arr.list[nfile].awalsim.tahun := tt;
-				
-				arr.list[nfile].energi := 10;
-				arr.list[nfile].kapasitas := 25;
-				arr.list[nfile].totalmentahbeli := 0;
-				arr.list[nfile].totalbahanbuat := 0;
-				arr.list[nfile].totalbahanjual := 0;
-				arr.list[nfile].totalresepjual := 0;
-				arr.list[nfile].pemasukan := 5000000;//modal
-				arr.list[nfile].pengeluaran := 0;
-				arr.list[nfile].uang := 5000000;//modal
-			end
-			else
-			begin
-				temp := copy (temp, guardmark+2, l); 						//truncate temp
-				l := l - guardmark - 1;										//panjang baru
-				guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
-				arr.list[nfile].energi := StrToInt( copy(temp, 1, (guardmark-2)) );		//assign energi
+			temp := copy (temp, guardmark+2, l); 						//truncate temp
+			l := l - guardmark - 1;										//panjang baru
+			guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
+			arr.list[nfile].totalmentahbeli := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign totalmentahbeli
 			
-				temp := copy (temp, guardmark+2, l); 						//truncate temp
-				l := l - guardmark - 1;										//panjang baru
-				guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
-				arr.list[nfile].kapasitas := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign kapasitas
-				
-				temp := copy (temp, guardmark+2, l); 						//truncate temp
-				l := l - guardmark - 1;										//panjang baru
-				guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
-				arr.list[nfile].totalmentahbeli := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign totalmentahbeli
+			temp := copy (temp, guardmark+2, l); 						//truncate temp
+			l := l - guardmark - 1;										//panjang baru
+			guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
+			arr.list[nfile].totalbahanbuat := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign totalbahanbuat
 			
-				temp := copy (temp, guardmark+2, l); 						//truncate temp
-				l := l - guardmark - 1;										//panjang baru
-				guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
-				arr.list[nfile].totalbahanbuat := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign totalbahanbuat
+			temp := copy (temp, guardmark+2, l); 						//truncate temp
+			l := l - guardmark - 1;										//panjang baru
+			guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
+			arr.list[nfile].totalbahanjual := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign totalbahanjual
+		
+			temp := copy (temp, guardmark+2, l); 						//truncate temp
+			l := l - guardmark - 1;										//panjang baru
+			guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
+			arr.list[nfile].totalresepjual := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign totalresepjual
 			
-				temp := copy (temp, guardmark+2, l); 						//truncate temp
-				l := l - guardmark - 1;										//panjang baru
-				guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
-				arr.list[nfile].totalbahanjual := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign totalbahanjual
+			temp := copy (temp, guardmark+2, l); 						//truncate temp
+			l := l - guardmark - 1;										//panjang baru
+			guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
+			arr.list[nfile].pemasukan := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign pemasukan
 			
-				temp := copy (temp, guardmark+2, l); 						//truncate temp
-				l := l - guardmark - 1;										//panjang baru
-				guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
-				arr.list[nfile].totalresepjual := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign totalresepjual
+			temp := copy (temp, guardmark+2, l); 						//truncate temp
+			l := l - guardmark - 1;										//panjang baru
+			guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
+			arr.list[nfile].pengeluaran := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign pengeluaran
 			
-				temp := copy (temp, guardmark+2, l); 						//truncate temp
-				l := l - guardmark - 1;										//panjang baru
-				guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
-				arr.list[nfile].pemasukan := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign pemasukan
-			
-				temp := copy (temp, guardmark+2, l); 						//truncate temp
-				l := l - guardmark - 1;										//panjang baru
-				guardmark := pos ('|' , temp);								//indeks dimana karakter '|' ditemukan
-				arr.list[nfile].pengeluaran := StrToInt( copy(temp, 1, (guardmark-2)) );	//assign pengeluaran
-			
-				arr.list[nfile].uang := arr.list[nfile].pemasukan - arr.list[nfile].pengeluaran; //assign uang
-			end;
+			arr.list[nfile].uang := arr.list[nfile].pemasukan - arr.list[nfile].pengeluaran; //assign uang
 		end;
-	
-		close(inf);
-		writeln ('> File simulasi berhasil di-load');
+	close(inf);
 	end;
+	
 end.
