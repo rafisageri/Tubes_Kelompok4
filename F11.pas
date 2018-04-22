@@ -45,8 +45,8 @@ procedure buang(var invenMentah: tabInventoriM; var invenOlahan: tabInventoriO; 
 var
 	Nkad: integer; //banyak barang yg sudah kadaluarsa
 	i: integer;
-	TempM: inventoriM; //variabel sementara untuk bahan mentah
-	TempO: inventoriO; //variabel sementara untuk bahan olahan
+	TempM: listInventoriM; //variabel sementara untuk bahan mentah
+	TempO: listInventoriO; //variabel sementara untuk bahan olahan
 begin
 	Nkad:= 0;
 	for i:=1 to invenMentah.Neff do
@@ -55,25 +55,25 @@ begin
 		//CEK INI
 		
 		//Mengolah bahan mentah
-		if (Sim.simulasi[N].awalsim.tanggal.hari >= InvenMentah.InventoriM[i].tglbeli.hari + cariKadaluarsa(invenMentah.inventoriM[i].nama, daftarMentah)) then
+		if (Sim.simulasi[N].awalsim.tanggal.hari >= InvenMentah.listInventoriM[i].tglbeli.hari + cariKadaluarsa(invenMentah.inventoriM[i].nama, daftarMentah)) then
 		begin
-			TempM.nama := invenMentah.inventoriM[i].nama;
-			TempM.tglbeli.hari := invenMentah.inventoriM[i].tglbeli.hari;
-			TempM.tglbeli.bulan := invenMentah.inventoriM[i].tglbeli.bulan;
-			TempM.tglbeli.tahun := invenMentah.inventoriM[i].tglbeli.tahun;
-			TempM.jumlah := invenMentah.inventoriM[i].jumlah;
+			TempM.nama := invenMentah.listInventoriM[i].nama;
+			TempM.tglbeli.hari := invenMentah.listInventoriM[i].tglbeli.hari;
+			TempM.tglbeli.bulan := invenMentah.listInventoriM[i].tglbeli.bulan;
+			TempM.tglbeli.tahun := invenMentah.listInventoriM[i].tglbeli.tahun;
+			TempM.jumlah := invenMentah.listInventoriM[i].jumlah;
 
-			invenMentah.inventoriM[i].nama := invenMentah.inventoriM[invenMentah.Neff-Nkad].nama;
-			invenMentah.inventoriM[i].tglbeli.hari := invenMentah.inventoriM[invenMentah.Neff-Nkad].tglbeli.hari;
-			invenMentah.inventoriM[i].tglbeli.bulan := invenMentah.inventoriM[invenMentah.Neff-Nkad].tglbeli.bulan;
-			invenMentah.inventoriM[i].tglbeli.tahun := invenMentah.inventoriM[invenMentah.Neff-Nkad].tglbeli.tahun;
-			invenMentah.inventoriM[i].jumlah := invenMentah.inventoriM[invenMentah.Neff-Nkad].jumlah;
+			invenMentah.listInventoriM[i].nama := invenMentah.listInventoriM[invenMentah.Neff-Nkad].nama;
+			invenMentah.listInventoriM[i].tglbeli.hari := invenMentah.listInventoriM[invenMentah.Neff-Nkad].tglbeli.hari;
+			invenMentah.listInventoriM[i].tglbeli.bulan := invenMentah.listInventoriM[invenMentah.Neff-Nkad].tglbeli.bulan;
+			invenMentah.listInventoriM[i].tglbeli.tahun := invenMentah.listInventoriM[invenMentah.Neff-Nkad].tglbeli.tahun;
+			invenMentah.listInventoriM[i].jumlah := invenMentah.listInventoriM[invenMentah.Neff-Nkad].jumlah;
 
-			invenMentah.inventoriM[invenMentah.Neff-Nkad].nama := TempM.nama;
-			invenMentah.inventoriM[invenMentah.Neff-Nkad].tglbeli.hari := TempM.tglbeli.hari;
-			invenMentah.inventoriM[invenMentah.Neff-Nkad].tglbeli.bulan := TempM.tglbeli.bulan;
-			invenMentah.inventoriM[invenMentah.Neff-Nkad].tglbeli.tahun := TempM.tglbeli.tahun;
-			invenMentah.inventoriM[invenMentah.Neff-Nkad].jumlah := TempM.jumlah;
+			invenMentah.listInventoriM[invenMentah.Neff-Nkad].nama := TempM.nama;
+			invenMentah.listInventoriM[invenMentah.Neff-Nkad].tglbeli.hari := TempM.tglbeli.hari;
+			invenMentah.listInventoriM[invenMentah.Neff-Nkad].tglbeli.bulan := TempM.tglbeli.bulan;
+			invenMentah.listInventoriM[invenMentah.Neff-Nkad].tglbeli.tahun := TempM.tglbeli.tahun;
+			invenMentah.listInventoriM[invenMentah.Neff-Nkad].jumlah := TempM.jumlah;
 
 			Nkad := Nkad + 1;			
 		end;
@@ -86,25 +86,25 @@ begin
 	Nkad:= 0;
 	for i:=1 to invenOlahan.Neff do
 	begin
-		if (Sim.simulasi[N].awalsim.tanggal.hari >= InvenOlahan.InventoriO[i].tglbeli.hari + 3) then
+		if (Sim.simulasi[N].awalsim.tanggal.hari >= InvenOlahan.listInventoriO[i].tglbeli.hari + 3) then
 		begin
-			TempO.nama := invenOlahan.inventoriO[i].nama;
-			TempO.tglbeli.hari := invenOlahan.inventoriO[i].tglbeli.hari;
-			TempO.tglbeli.bulan := invenOlahan.inventoriO[i].tglbeli.bulan;
-			TempO.tglbeli.tahun := invenOlahan.inventoriO[i].tglbeli.tahun;
-			TempO.jumlah := invenOlahan.inventoriO[i].jumlah;
+			TempO.nama := invenOlahan.listInventoriO[i].nama;
+			TempO.tglbeli.hari := invenOlahan.listInventoriO[i].tglbeli.hari;
+			TempO.tglbeli.bulan := invenOlahan.listInventoriO[i].tglbeli.bulan;
+			TempO.tglbeli.tahun := invenOlahan.listInventoriO[i].tglbeli.tahun;
+			TempO.jumlah := invenOlahan.listInventoriO[i].jumlah;
 
-			invenOlahan.inventoriO[i].nama := invenOlahan.inventoriO[invenOlahan.Neff-Nkad].nama;
-			invenOlahan.inventoriO[i].tglbeli.hari := invenOlahan.inventoriO[invenOlahan.Neff-Nkad].tglbeli.hari;
-			invenOlahan.inventoriO[i].tglbeli.bulan := invenOlahan.inventoriO[invenOlahan.Neff-Nkad].tglbeli.bulan;
-			invenOlahan.inventoriO[i].tglbeli.tahun := invenOlahan.inventoriO[invenOlahan.Neff-Nkad].tglbeli.tahun;
-			invenOlahan.inventoriO[i].jumlah := invenOlahan.inventoriO[invenOlahan.Neff-Nkad].jumlah;
+			invenOlahan.listInventoriO[i].nama := invenOlahan.listInventoriO[invenOlahan.Neff-Nkad].nama;
+			invenOlahan.listInventoriO[i].tglbeli.hari := invenOlahan.listInventoriO[invenOlahan.Neff-Nkad].tglbeli.hari;
+			invenOlahan.listInventoriO[i].tglbeli.bulan := invenOlahan.listInventoriO[invenOlahan.Neff-Nkad].tglbeli.bulan;
+			invenOlahan.listInventoriO[i].tglbeli.tahun := invenOlahan.listInventoriO[invenOlahan.Neff-Nkad].tglbeli.tahun;
+			invenOlahan.listInventoriO[i].jumlah := invenOlahan.listInventoriO[invenOlahan.Neff-Nkad].jumlah;
 
-			invenOlahan.inventoriO[invenOlahan.Neff-Nkad].nama := TempO.nama;
-			invenOlahan.inventoriO[invenOlahan.Neff-Nkad].tglbeli.hari := TempO.tglbeli.hari;
-			invenOlahan.inventoriO[invenOlahan.Neff-Nkad].tglbeli.bulan := TempO.tglbeli.bulan;
-			invenOlahan.inventoriO[invenOlahan.Neff-Nkad].tglbeli.tahun := TempO.tglbeli.tahun;
-			invenOlahan.inventoriO[invenOlahan.Neff-Nkad].jumlah := TempO.jumlah;
+			invenOlahan.listInventoriO[invenOlahan.Neff-Nkad].nama := TempO.nama;
+			invenOlahan.listInventoriO[invenOlahan.Neff-Nkad].tglbeli.hari := TempO.tglbeli.hari;
+			invenOlahan.listInventoriO[invenOlahan.Neff-Nkad].tglbeli.bulan := TempO.tglbeli.bulan;
+			invenOlahan.listInventoriO[invenOlahan.Neff-Nkad].tglbeli.tahun := TempO.tglbeli.tahun;
+			invenOlahan.listInventoriO[invenOlahan.Neff-Nkad].jumlah := TempO.jumlah;
 
 			Nkad := Nkad + 1;			
 		end;
