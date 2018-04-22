@@ -202,8 +202,9 @@ implementation
 			//cekdulu bTidur
 			if bTidur=true then //boleh tidur
 			begin
-				tidur(energi, eoDay, invMth, invOlh);
+				tidur(energi, eoDay, TglHariIni,DftrSim, simN);
 				bTidur:=false;
+				buangKadaluarsa(TglHariIni, invMentah, DftrMentah, invOlahan,DftrOlahan, simN);
 			end else //bTidur=false
 			begin
 				writeln('Anda belum dapat tidur, anda harus melakukan kegiatan lain');
