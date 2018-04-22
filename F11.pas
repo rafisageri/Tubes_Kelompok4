@@ -3,10 +3,10 @@ unit F11;
 interface
 uses typeuniverse, uload, sysutils, penanggalan;
 function cariKadaluarsa (bahan : string; daftarMentah : tabmentah): integer;
-function isKadaluarsaM (i : integer; daftarmentah : tabMentah; inventoriM : listInventoriM; sim : listSimulasi; nfile : integer): boolean;
-function isKadaluarsaO (i : integer; daftarolahan : tabOlahan; inventoriO : listInventoriO; sim : listSimulasi; nfile : integer): boolean;
-procedure buangKadaluarsa (sim : listSimulasi; InventoriM : listInventoriM; mentah : tabmentah; InventoriO : listInventoriO; olahan : tabolahan; nfile : integer);
-procedure tidur (var simulasi : listSimulasi; var BTidur : boolean; nfile : integer);
+function isKadaluarsaM (i : integer; daftarmentah : tabMentah; inventoriM : listInventoriM; TglHariIni : tanggal; nfile : integer): boolean;
+function isKadaluarsaO (i : integer; daftarolahan : tabOlahan; inventoriO : listInventoriO; TglHariIni : tanggal; nfile : integer): boolean;
+procedure buangKadaluarsa (TglHariIni : tanggal; var InventoriM : listInventoriM; mentah : tabmentah; var InventoriO : listInventoriO; olahan : tabolahan; nfile : integer);
+procedure tidur (var energi : integer; var eoDay : boolean; var TglHariIni : tanggal; var sim : listSimulasi; nfile : integer);
 
 implementation
 function cariKadaluarsa (bahan : string; daftarMentah : tabmentah): integer;
@@ -25,8 +25,8 @@ function cariKadaluarsa (bahan : string; daftarMentah : tabmentah): integer;
 		end;
 	end;
 
-function isKadaluarsaM (i : integer; daftarmentah : tabMentah; inventoriM : listInventoriM; sim : listSimulasi; nfile : integer): boolean;
-	{I.S. Indeks bahan mentah di array inventori yang akan diperkisa, daftar bahan mentah, daftar inventori bahan mentah, dan file simulasi terdefinisi
+function isKadaluarsaM (i : integer; daftarmentah : tabMentah; inventoriM : listInventoriM; TglHariIni : tanggal; nfile : integer): boolean;
+	{I.S. Indeks bahan mentah di array inventori yang akan diperkisa, daftar bahan mentah, daftar inventori bahan mentah, dan tanggal hari ini terdefinisi
 	 F.S. Fungsi memberikan nilai True jika bahan mentah sudah kadaluarsa}
 	var {KAMUS LOKAL isKadaluarsaM}
 		tglKadaluarsa : tanggal; {variabel temporary}
@@ -42,20 +42,20 @@ function isKadaluarsaM (i : integer; daftarmentah : tabMentah; inventoriM : list
 			gantiHari (tglKadaluarsa);
 		end;
 		{Proyeksi tanggal kadaluarsa dari bahan mentah sudah tersimpan}
-		if (tglKadaluarsa.tahun > sim.list[nfile].awalsim.tahun) then
+		if (tglKadaluarsa.tahun > TglHariIni.tahun) then
 		begin 
 			isKadaluarsaM := True;
-		end else {tglKadaluarsa.tahun <= sim.list[nfile].awalsim.tahun} 
+		end else {tglKadaluarsa.tahun <= TglHariIni.tahun} 
 		begin
-			if (tglKadaluarsa.bulan > sim.list[nfile].awalsim.bulan) then
+			if (tglKadaluarsa.bulan > TglHariIni.bulan) then
 			begin
 				isKadaluarsaM := True;
-			end else {tglKadaluarsa.bulan <= sim.list[nfile].awalsim.bulan}
+			end else {tglKadaluarsa.bulan <= TglHariIni.bulan}
 			begin
-				if (tglKadaluarsa.hari > sim.list[nfile].awalsim.hari) then
+				if (tglKadaluarsa.hari > TglHariIni.hari) then
 				begin
 					isKadaluarsaM := True;
-				end else {tglKadaluarsa.hari <= sim.list[nfile].awalsim.hari}
+				end else {tglKadaluarsa.hari <= TglHariIni.hari}
 				begin 
 					isKadaluarsaM := False;
 				end;
@@ -63,8 +63,8 @@ function isKadaluarsaM (i : integer; daftarmentah : tabMentah; inventoriM : list
 		end;
 	end;
 	
-function isKadaluarsaO (i : integer; daftarolahan : tabOlahan; inventoriO : listInventoriO; sim : listSimulasi; nfile : integer): boolean;
-	{I.S. Indeks bahan olahan di array inventori yang akan diperkisa, daftar bahan olahan, daftar inventori bahan olahan, dan file simulasi terdefinisi
+function isKadaluarsaO (i : integer; daftarolahan : tabOlahan; inventoriO : listInventoriO; TglHariIni : tanggal; nfile : integer): boolean;
+	{I.S. Indeks bahan olahan di array inventori yang akan diperkisa, daftar bahan olahan, daftar inventori bahan olahan, dan tanggal hari ini terdefinisi
 	 F.S. Fungsi memberikan nilai True jika bahan olahan sudah kadaluarsa}
 	var {KAMUS LOKAL isKadaluarsaO}
 		tglKadaluarsa : tanggal; {variabel temporary}
@@ -80,20 +80,20 @@ function isKadaluarsaO (i : integer; daftarolahan : tabOlahan; inventoriO : list
 			gantiHari (tglKadaluarsa);
 		end;
 		{Proyeksi tanggal kadaluarsa dari bahan olahan sudah tersimpan}
-		if (tglKadaluarsa.tahun > sim.list[nfile].awalsim.tahun) then
+		if (tglKadaluarsa.tahun > TglHariIni.tahun) then
 		begin 
 			isKadaluarsaO := True;
-		end else {tglKadaluarsa.tahun <= sim.list[nfile].awalsim.tahun} 
+		end else {tglKadaluarsa.tahun <= TglHariIni.tahun} 
 		begin
-			if (tglKadaluarsa.bulan > sim.list[nfile].awalsim.bulan) then
+			if (tglKadaluarsa.bulan > TglHariIni.bulan) then
 			begin
 				isKadaluarsaO := True;
-			end else {tglKadaluarsa.bulan <= sim.list[nfile].awalsim.bulan}
+			end else {tglKadaluarsa.bulan <= TglHariIni.bulan}
 			begin
-				if (tglKadaluarsa.hari > sim.list[nfile].awalsim.hari) then
+				if (tglKadaluarsa.hari > TglHariIni.hari) then
 				begin
 					isKadaluarsaO := True;
-				end else {tglKadaluarsa.hari <= sim.list[nfile].awalsim.hari}
+				end else {tglKadaluarsa.hari <= TglHariIni.hari}
 				begin 
 					isKadaluarsaO := False;
 				end;
@@ -102,7 +102,7 @@ function isKadaluarsaO (i : integer; daftarolahan : tabOlahan; inventoriO : list
 	end;
 	
 
-procedure buangKadaluarsa (sim : listSimulasi; InventoriM : listInventoriM; mentah : tabmentah; InventoriO : listInventoriO; olahan : tabolahan; nfile : integer);
+procedure buangKadaluarsa (TglHariIni : tanggal; var InventoriM : listInventoriM; mentah : tabmentah; var InventoriO : listInventoriO; olahan : tabolahan; nfile : integer);
 	{I.S. List inventori bahan mentah, list inventori bahan olahan terdefinisi
 	 F.S. Semua bahan mentah dan bahan olahan di inventori yang sudah jatuh kadaluarsa pada tanggal hari ini dihapus dari inventori}
 	var {KAMUS LOKAL buangKadaluarsa} 
@@ -114,7 +114,7 @@ procedure buangKadaluarsa (sim : listSimulasi; InventoriM : listInventoriM; ment
 		{Menghapus bahan mentah kadaluarsa dari inventori}
 		for i:=1 to InventoriM.neff do
 		begin
-			if (isKadaluarsaM(i, mentah, InventoriM,sim,nfile)) then
+			if (isKadaluarsaM(i, mentah, InventoriM,TglHariIni,nfile)) then
 			begin
 				{Menghapus inventori ke-i kemudian menggeser inventori yang lain dengan cara memanipulasi file eksternal}
 				namaFile := 'inventorimentah' + IntToStr(nfile) + '.txt';
@@ -142,7 +142,7 @@ procedure buangKadaluarsa (sim : listSimulasi; InventoriM : listInventoriM; ment
 		{Menghapus bahan olahan kadaluarsa dari inventori}
 		for i:=1 to InventoriO.neff do
 		begin
-			if (isKadaluarsaO(i, olahan, InventoriO,sim,nfile)) then
+			if (isKadaluarsaO(i, olahan, InventoriO,TglHariIni,nfile)) then
 			begin
 				{Menghapus inventori ke-i kemudian menggeser inventori yang lain dengan cara memanipulasi file eksternal}
 				namaFile := 'inventoriolahan' + IntToStr(nfile) + '.txt';
@@ -168,21 +168,17 @@ procedure buangKadaluarsa (sim : listSimulasi; InventoriM : listInventoriM; ment
 		end;
 	end;
 	
-procedure tidur (var simulasi : listSimulasi; var BTidur : boolean; nfile : integer);
+procedure tidur (var energi : integer; var eoDay : boolean; var TglHariIni : tanggal; var sim : listSimulasi; nfile : integer);
 	{I.S. Data simulasi nomor <nfile> terdefinisi
 	 F.S. Energi ter-reset menjadi 10, barang-barang kadaluarsa dihapus dari inventori, markTidur bernilai True}
 	 
 	{ALGORITMA tidur}
-	begin
-		if (BTidur) then
-		begin
-			writeln ('Anda tidak dapat melakukan aksi tidur saat ini');
-		end else {markTidur bernilai False}
-		begin
-			simulasi.list[nfile].energi := 10;
-			writeln('Anda telah tidur dan tubuh Anda telah kembali fit, yeay!');
-			simulasi.list[nfile].awalsim.hari := simulasi.list[nfile].awalsim.hari + 1;
-			writeln('Hari ke-', simulasi.list[nfile].awalsim.hari);
-		end;
+	begin		
+		energi := 10;
+		writeln('Anda telah tidur dan tubuh Anda telah kembali fit, yeay!');
+		gantiHari (TglHariIni);
+		sim.list[nfile].totalhari := sim.list[nfile].totalhari + 1;
+		writeln('Hari ke-', sim.list[nfile].totalhari);
+		eoDay := True;
 	end;
 end.
