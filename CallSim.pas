@@ -13,7 +13,7 @@ unit CallSim;
 	TglHariIni tanggal
 	}
 interface
-uses F5, F6, F7, F8, F9, F10, {F11,} F12, F13F14, F15, F16, F17, typeuniverse;
+uses F5, F6, F7, F8, F9, F10, F11, F12, F13F14, F15, F16, F17, typeuniverse;
 	procedure Call0(var simN	: integer;
 					var eoSim	: boolean;
 					var eoProg	: boolean;
@@ -60,6 +60,7 @@ implementation
 		else if s='startSimulasi' then //F3
 		begin
 			writeln('Simulasi berapa yang ingin dijalankan?');
+			write('>> ');
 			readln(simN);
 			writeln('> Start ', simN);
 			writeln('Mulai simulasi ', simN);
@@ -68,6 +69,7 @@ implementation
 		else if s='lihatInventori' then //F13
 		begin
 			writeln('Inventori simulasi berapa yang ingin dilihat?');
+			write('>> ');
 			readln(simN);
 			writeln('Membaca Inventori simulasi ', simN);
 			lihatInventori(invMentah.list[simN], invOlahan.list[simN]);
@@ -87,6 +89,7 @@ implementation
 		else if s='upgradeInventori' then //F17
 		begin
 			writeln('Inventori simulasi berapa yang ingin di-upgrade?');
+			write('>> ');
 			readln(simN);
 			writeln('Meng-upgrade inventori simulasi ', simN);
 			upgradeInventori(DftrSim.list[simN].kapasitas);
@@ -194,7 +197,7 @@ implementation
 				bTidur:= True;
 				//boleh tidur
 		end
-		{else if s='tidur' then //F11 //.--- //BUG DELETE
+		else if s='tidur' then //F11
 		begin
 			//cekdulu bTidur
 			if bTidur=true then //boleh tidur
@@ -205,7 +208,7 @@ implementation
 			begin
 				writeln('Anda belum dapat tidur, anda harus melakukan kegiatan lain');
 			end;
-		end}
+		end
 		else if s='lihatStatistik' then //F12
 		begin
 			lihatStatistik(simN, DftrSim);
@@ -213,7 +216,7 @@ implementation
 		end
 		else if s='lihatInventori' then //F13
 		begin
-			writeln('Membaca Inventori simulasi';
+			writeln('Membaca Inventori simulasi');
 			lihatInventori(invMentah.list[simN], invOlahan.list[simN]);
 		end
 		else if s='lihatResep' then //F14
