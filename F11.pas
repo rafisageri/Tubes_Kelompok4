@@ -2,10 +2,10 @@ unit F11;
 
 interface
 uses typeuniverse;
-procedure tidur(var Sim: tabSimulasi; N: integer; aktivitas: boolean = false);
+procedure tidur(var Sim: tabSimulasi; N: integer; var bTidur: boolean; var eoDay: boolean);
 
 implementation
-procedure tidur( var Sim: tabSimulasi; aktivitas: boolean; N: integer; var eoDay: boolean);
+procedure tidur(var Sim: tabSimulasi; var bTidur: boolean; N: integer; var eoDay: boolean);
 	begin
 	if (eoDay) then
 		begin
@@ -14,15 +14,15 @@ procedure tidur( var Sim: tabSimulasi; aktivitas: boolean; N: integer; var eoDay
 		writeln('Anda telah tidur dan Energi Anda telah dipulihkan!');
 		writeln('Hari ke-', Sim.tabSimulasi[N].awalsim.hari);
 		eoDay := false;
-		aktivitas := false;
-		end else if (aktivitas) then 
+		bTidur := false;
+		end else if (bTidur) then 
 			begin
 			Sim.tabSimulasi[N].energi := 10;
 			Sim.tabSimulasi[N].awalsim.hari := Sim.tabSimulasi[N].awalsim.hari + 1;
 			writeln('Anda telah tidur dan Energi Anda telah dipulihkan!');
 			writeln('Hari ke-', Sim.tabSimulasi[N].awalsim.hari);
 			eoDay := false;
-			aktivitas := false;
+			bTidur := false;
 			end else writeln('Anda tidak dapat tidur karena Anda belum melakukan apapun');
 		
 //variabel 'boleh-tidur' blm terdefinisi
