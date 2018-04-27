@@ -1,4 +1,4 @@
-	unit F13F14;
+unit F13F14;
 
 interface
 	uses sysutils, typeuniverse;
@@ -138,6 +138,7 @@ implementation
 	{KAMUS LOKAL lihatInventoriM}
 	var
 		i, j : integer; {counter traversal}
+		temp1, temp2 : string;
 	{ALGORITMA lihatInventoriM}
 	begin
 		if (x.neff < 1) then
@@ -151,10 +152,13 @@ implementation
 			{Ada kemungkinan daftar bahan mentah di inventori belum terurut, maka akan dilakukan sorting dengan metode insertion sort}
 			for i:=2 to x.neff do
 			begin
+				temp1 := x.tab[i].nama;
 				j:= i-1;
-				while ((not(isUrut(x.tab[j].nama, x.tab[i].nama))) and (j>=1)) do
+				while ((not(isUrut(x.tab[j].nama, temp1))) and (j>=1)) do
 				begin
-					urutString(x.tab[j].nama, x.tab[i].nama);
+					temp2:= x.tab[j].nama;
+					x.tab[j].nama := temp1;
+					x.tab[j+1].nama := temp2;
 					j:=j-1;
 				end;
 				{isUrut bernilai True yang berarti string sudah menemukan posisi yang tepat atau string diletakkan di posisi pertama}
@@ -173,6 +177,7 @@ implementation
 	{KAMUS LOKAL lihatInventoriO}
 	var
 		i, j : integer; {counter traversal}
+		temp1, temp2 : string;
 	{ALGORITMA lihatInventoriO}
 	begin
 		if (x.neff < 1) then
@@ -186,10 +191,13 @@ implementation
 			{Ada kemungkinan daftar bahan olahan di inventori belum terurut, maka akan dilakukan sorting dengan metode insertion sort}
 			for i:=2 to x.neff do
 			begin
+				temp1 := x.tab[i].nama;
 				j:= i-1;
-				while ((not(isUrut(x.tab[j].nama, x.tab[i].nama))) and (j>=1)) do
+				while ((not(isUrut(x.tab[j].nama, temp1))) and (j>=1)) do
 				begin
-					urutString(x.tab[j].nama, x.tab[i].nama);
+					temp2 := x.tab[j].nama;
+					x.tab[j].nama := temp1;
+					x.tab[j+1].nama := temp2;
 					j:=j-1;
 				end;
 				{isUrut bernilai True yang berarti string sudah menemukan posisi yang tepat atau string diletakkan di posisi pertama}
